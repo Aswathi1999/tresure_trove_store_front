@@ -3,7 +3,7 @@ import type { HttpTypes } from '@medusajs/types'
 import { formatPrice } from '@TreasureTrove/utils'
 
 const MEDUSA_BASE_URL = process.env['NEXT_PUBLIC_MEDUSA_BACKEND_URL'] ?? 'http://localhost:9000'
-const MEDUSA_PUB_KEY = process.env['NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY'] ?? ''
+const MEDUSA_PUB_KEY = (process.env['NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY'] ?? '').trim()
 
 export const medusa = new Medusa({
   baseUrl: MEDUSA_BASE_URL,
