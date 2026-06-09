@@ -1,0 +1,6 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "pnpm build --filter=storefront",
+  "outputDirectory": "apps/storefront/.next",
+  "installCommand": "pnpm install"
+}
