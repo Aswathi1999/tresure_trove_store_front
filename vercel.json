@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "pnpm --filter @TreasureTrove/types run build && pnpm --filter @TreasureTrove/utils run build && pnpm --filter @TreasureTrove/ui run build && pnpm --filter storefront run build",
+  "buildCommand": "turbo build --filter=storefront",
   "outputDirectory": "apps/storefront/.next",
   "installCommand": "pnpm install"
 }
