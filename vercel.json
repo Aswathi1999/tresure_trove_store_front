@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "pnpm build --filter=storefront",
+  "buildCommand": "turbo build --filter=storefront",
   "outputDirectory": "apps/storefront/.next",
   "installCommand": "pnpm install"
 }
