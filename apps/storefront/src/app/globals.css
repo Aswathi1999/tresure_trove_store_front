@@ -1,0 +1,274 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Mulish', ui-sans-serif, system-ui, sans-serif;
+  --color-tt-bg: #faf6ee;
+  --color-tt-ink: #1f1b16;
+  --color-tt-ink-muted: #4a443d;
+  --color-tt-orange: #b45a3c;
+  --color-tt-gold: #d5c68f;
+  --color-tt-gold-hover: #caba80;
+  --color-tt-brown: #795a4f;
+  --color-tt-rose: #ab877b;
+  --color-tt-off-white: #faf6ee;
+  --color-tt-surface: #fff8f3;
+  --color-tt-surface-container: #f7ece2;
+  --color-tt-surface-container-high: #f1e6dd;
+  --color-tt-surface-container-lowest: #ffffff;
+  --color-tt-outline: #7c7768;
+  --color-tt-outline-variant: #cdc6b7;
+  --color-tt-danger: #9a2c1a;
+  --tracking-widest-ui: 0.1em;
+}
+
+html,
+body {
+  font-family: 'Mulish', ui-sans-serif, system-ui, sans-serif;
+  /* Block page-level horizontal swiping on mobile when any descendant overflows.
+     Applied to both `html` and `body` because the actual scroll container differs
+     by browser. `hidden` is universally supported and is safe here because the
+     site uses `position: fixed` (not `sticky`) for the navbar. */
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  background-color: var(--color-tt-bg);
+  color: var(--color-tt-ink);
+  /* Prevent content being hidden behind mobile bottom tab bar */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ─── Utility helpers ─── */
+.tracking-widest-ui {
+  letter-spacing: 0.1em;
+}
+
+/* Slim, brand-tinted scrollbar for the PDP thumbnail strip so a long image
+   list scrolls inside its column without a heavy default scrollbar. */
+.tt-thumb-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-tt-outline-variant) transparent;
+}
+.tt-thumb-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.tt-thumb-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-tt-outline-variant);
+  border-radius: 9999px;
+}
+.tt-thumb-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── tt-* scroll-driven animation system ─── */
+@keyframes tt-reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 56px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes tt-reveal-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-60px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes tt-reveal-right {
+  from {
+    opacity: 0;
+    transform: translate3d(60px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes tt-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes tt-blur-in {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes tt-zoom-parallax-kf {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes tt-fallback-fade {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Fallback: simple fade-up once on mount */
+.tt-reveal-up,
+.tt-reveal-left,
+.tt-reveal-right,
+.tt-reveal-scale,
+.tt-reveal-blur {
+  opacity: 0;
+  animation: tt-fallback-fade 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+/* Modern scroll-driven (Chrome/Edge 115+, Safari 26+) */
+@supports (animation-timeline: view()) {
+  .tt-reveal-up,
+  .tt-reveal-left,
+  .tt-reveal-right,
+  .tt-reveal-scale,
+  .tt-reveal-blur {
+    opacity: 1;
+    animation-timeline: view();
+    animation-range: entry 8% cover 38%;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .tt-reveal-up {
+    animation-name: tt-reveal-up;
+  }
+  .tt-reveal-left {
+    animation-name: tt-reveal-left;
+  }
+  .tt-reveal-right {
+    animation-name: tt-reveal-right;
+  }
+  .tt-reveal-scale {
+    animation-name: tt-scale-in;
+  }
+  .tt-reveal-blur {
+    animation-name: tt-blur-in;
+  }
+
+  .tt-stagger > * {
+    animation-timeline: view();
+    animation-range: entry calc(var(--i, 0) * 4%) cover calc(30% + var(--i, 0) * 4%);
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-name: tt-reveal-up;
+  }
+  .tt-stagger-scale > * {
+    animation-timeline: view();
+    animation-range: entry calc(var(--i, 0) * 4%) cover calc(30% + var(--i, 0) * 4%);
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-name: tt-scale-in;
+  }
+
+  .tt-zoom-parallax {
+    animation: tt-zoom-parallax-kf linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 60%;
+    will-change: transform;
+  }
+}
+
+/* Hover lift */
+.tt-lift {
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.tt-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -12px rgba(31, 27, 22, 0.18);
+}
+
+/* Image ken-burns zoom on hover */
+.tt-zoom-hover {
+  overflow: hidden;
+}
+.tt-zoom-hover > img,
+.tt-zoom-hover img {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.tt-zoom-hover:hover > img,
+.tt-zoom-hover:hover img {
+  transform: scale(1.08);
+}
+
+/* Cycling text animation */
+@keyframes tt-word-cycle {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.tt-cycle-word {
+  display: inline-block;
+  animation: tt-word-cycle 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tt-reveal-up,
+  .tt-reveal-left,
+  .tt-reveal-right,
+  .tt-reveal-scale,
+  .tt-reveal-blur,
+  .tt-stagger > *,
+  .tt-stagger-scale > *,
+  .tt-zoom-parallax {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .tt-lift:hover {
+    transform: none;
+  }
+  .tt-zoom-hover:hover > img,
+  .tt-zoom-hover:hover img {
+    transform: none;
+  }
+}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-background": "#1f1b15",
+                        "on-tertiary-fixed": "#161f00",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#4a473b",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fff8f3",
+                        "outline-variant": "#cdc6b7",
+                        "inverse-surface": "#353029",
+                        "surface-container-low": "#fcf2e8",
+                        "secondary-fixed-dim": "#e6beb0",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#d5c68f",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1f1b15",
+                        "background": "#fff8f3",
+                        "on-secondary-fixed-variant": "#5d4036",
+                        "secondary": "#76574d",
+                        "surface-variant": "#ebe1d7",
+                        "on-secondary-container": "#795a4f",
+                        "on-tertiary-fixed-variant": "#404b24",
+                        "surface": "#fff8f3",
+                        "primary-container": "#d5c68f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#ebe1d7",
+                        "tertiary-fixed": "#dbe8b4",
+                        "inverse-primary": "#d5c68f",
+                        "secondary-container": "#fed4c6",
+                        "primary": "#695e31",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f7ece2",
+                        "on-tertiary-container": "#4b572e",
+                        "on-secondary-fixed": "#2c160e",
+                        "on-primary-fixed": "#221b00",
+                        "surface-container-high": "#f1e6dd",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffdbcf",
+                        "surface-dim": "#e2d8cf",
+                        "tertiary-container": "#bfcc99",
+                        "surface-tint": "#695e31",
+                        "inverse-on-surface": "#faefe5",
+                        "tertiary-fixed-dim": "#bfcc99",
+                        "primary-fixed": "#f2e2a9",
+                        "on-primary-fixed-variant": "#50461b"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        sans: ["Poppins", "sans-serif"],
+                        headline: ["Poppins", "sans-serif"],
+                        body: ["Poppins", "sans-serif"],
+                        label: ["Poppins", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Poppins', sans-serif; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .uppercase-tracking { text-transform: uppercase; letter-spacing: 0.10em; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Announcement Bar -->
+<div class="w-full bg-[#AB877B] text-[#FAF6EE] py-2 text-center text-[10px] sm:text-xs font-semibold uppercase-tracking">
+        Complimentary shipping on orders over ₹10,000 within India
+    </div>
+<!-- TopNavBar -->
+<header class="bg-[#FFFFFF] dark:bg-zinc-900 sticky top-0 z-50 shadow-[0_20px_40px_rgba(31,27,22,0.05)]">
+<div class="max-w-screen-2xl mx-auto px-8 flex flex-col">
+<div class="flex items-center justify-between py-6">
+<!-- Brand Logo -->
+<a class="text-xl font-bold text-[#1F1B16] dark:text-[#FAF6EE] tracking-tight" href="/">TREASURE TROVE</a>
+<!-- Desktop Links -->
+<nav class="hidden lg:flex items-center space-x-8">
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] font-semibold text-[14px] uppercase-tracking hover:text-[#D5C68F] transition-colors duration-300" href="#">DECOR</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] font-semibold text-[14px] uppercase-tracking hover:text-[#D5C68F] transition-colors duration-300" href="#">BED &amp; BATH</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] font-semibold text-[14px] uppercase-tracking hover:text-[#D5C68F] transition-colors duration-300" href="#">KITCHEN &amp; DINING</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] font-semibold text-[14px] uppercase-tracking hover:text-[#D5C68F] transition-colors duration-300" href="#">BAR &amp; GLASSWARE</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] font-semibold text-[14px] uppercase-tracking hover:text-[#D5C68F] transition-colors duration-300" href="#">FLOWERS &amp; PLANTS</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] font-semibold text-[14px] uppercase-tracking hover:text-[#D5C68F] transition-colors duration-300" href="#">OUTDOOR</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center space-x-6">
+<button class="material-symbols-outlined text-on-surface hover:text-[#D5C68F] transition-colors">person</button>
+<button class="material-symbols-outlined text-on-surface hover:text-[#D5C68F] transition-colors">favorite</button>
+<button class="material-symbols-outlined text-on-surface hover:text-[#D5C68F] transition-colors">shopping_bag</button>
+</div>
+</div>
+</div>
+</header>
+<main>
+<!-- Editorial Hero Band -->
+<section class="bg-surface py-20 md:py-32 flex flex-col items-center justify-center text-center px-6">
+<h1 class="text-4xl md:text-6xl font-bold text-on-background mb-4 tracking-tight">Contact Us</h1>
+<p class="text-lg md:text-xl text-[#8A847B] max-w-xl">We reply within one business day.</p>
+</section>
+<!-- Main Grid Container -->
+<section class="max-w-screen-2xl mx-auto px-6 md:px-12 pb-32">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<!-- Left Column: Contact Form -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-8 md:p-12 rounded-lg shadow-[0_20px_40px_rgba(31,27,22,0.03)] border border-outline-variant/40">
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[12px] font-bold uppercase-tracking text-on-surface-variant">NAME</label>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-[#D5C68F] focus:ring-0 px-0 py-2 transition-all outline-none" placeholder="Enter your full name" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[12px] font-bold uppercase-tracking text-on-surface-variant">EMAIL</label>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-[#D5C68F] focus:ring-0 px-0 py-2 transition-all outline-none" placeholder="hello@domain.com" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[12px] font-bold uppercase-tracking text-on-surface-variant">PHONE</label>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-[#D5C68F] focus:ring-0 px-0 py-2 transition-all outline-none" placeholder="+91 00000 00000" type="tel"/>
+</div>
+<div class="space-y-2">
+<label class="text-[12px] font-bold uppercase-tracking text-on-surface-variant">SUBJECT</label>
+<select class="w-full bg-transparent border-b border-outline-variant focus:border-[#D5C68F] focus:ring-0 px-0 py-2 transition-all outline-none appearance-none">
+<option>Select an option</option>
+<option>Order Status</option>
+<option>Product Inquiry</option>
+<option>Bulk Orders</option>
+<option>General Support</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[12px] font-bold uppercase-tracking text-on-surface-variant">MESSAGE</label>
+<textarea class="w-full bg-transparent border-b border-outline-variant focus:border-[#D5C68F] focus:ring-0 px-0 py-2 transition-all outline-none resize-none" placeholder="How can we help you today?" rows="4"></textarea>
+</div>
+<button class="bg-[#D5C68F] text-[#1F1B16] px-10 py-4 font-bold uppercase-tracking text-sm rounded-sm hover:bg-[#c9b87e] transition-all duration-300 scale-100 active:scale-95 shadow-lg" type="submit">
+                            SEND MESSAGE
+                        </button>
+</form>
+</div>
+<!-- Right Column: Info Cards -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Visit Us -->
+<div class="bg-surface-container p-8 rounded-lg border-l-4 border-[#D5C68F]">
+<div class="flex items-start space-x-4">
+<span class="material-symbols-outlined text-primary-fixed-dim shrink-0">location_on</span>
+<div class="space-y-4">
+<h3 class="font-bold uppercase-tracking text-sm text-on-background">VISIT US</h3>
+<div class="space-y-1">
+<p class="text-sm text-on-surface-variant leading-relaxed">No. 42, Hèritage Mews, Whitefield Main Road</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">Bengaluru, Karnataka 560066</p>
+</div>
+<div class="pt-2 border-t border-outline-variant/30">
+<p class="text-xs font-bold uppercase-tracking text-on-surface-variant mb-1">HOURS</p>
+<p class="text-sm text-on-surface-variant">Mon – Sat: 10:00 AM – 8:00 PM</p>
+<p class="text-sm text-on-surface-variant">Sun: 11:00 AM – 6:00 PM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Call Us -->
+<div class="bg-surface-container p-8 rounded-lg">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary-fixed-dim">call</span>
+<div>
+<h3 class="font-bold uppercase-tracking text-sm text-on-background">CALL US</h3>
+<p class="text-sm text-on-surface-variant mt-1">+91 (80) 4567 8900</p>
+</div>
+</div>
+</div>
+<!-- Email Us -->
+<div class="bg-surface-container p-8 rounded-lg">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary-fixed-dim">mail</span>
+<div>
+<h3 class="font-bold uppercase-tracking text-sm text-on-background">EMAIL US</h3>
+<p class="text-sm text-on-surface-variant mt-1">concierge@treasuretrove.in</p>
+</div>
+</div>
+</div>
+<!-- Chat -->
+<div class="bg-surface-container p-8 rounded-lg">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary-fixed-dim">chat_bubble</span>
+<div>
+<h3 class="font-bold uppercase-tracking text-sm text-on-background">LIVE CHAT</h3>
+<p class="text-sm text-on-surface-variant mt-1">Chat with our experts online for instant support.</p>
+<a class="inline-block mt-3 text-[12px] font-bold uppercase-tracking text-[#D5C68F] border-b border-[#D5C68F] pb-1 hover:text-primary transition-colors" href="#">START CHAT</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Section (Full Width Ivory) -->
+<section class="w-full h-[400px] bg-surface-container relative overflow-hidden group">
+<img class="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-1000" data-alt="minimalist architectural aerial view of a clean modern city layout with soft sunlight and geometric shadows" data-location="Bengaluru" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-AJBhnT98n0Ke3HnOHlDtsK4e5aLXET9VhHpce-FTCc8Mta71R3oVZg-Fz6qBz90rntZgI_HKwssP9fsqTOHNyFYntsGhUqKmOXDOdUe9q0XTltQ0geRpPDNO5e_2k2lCL_4oEClZ3se7-VSnVagHEJmhABCtYfQwMSer37dkr4TRpq3GG8hHfP4hBpUFrnC_7GwuNnCbcgVsQnooJCuhI4ZPyYBPQc617w-VzJyKsMWic1TPun3eNrdC7xTARKGJ-khacRFFcI2o"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white/90 backdrop-blur-md px-8 py-6 rounded-sm shadow-xl flex items-center space-x-4">
+<div class="w-12 h-12 bg-[#D5C68F] rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white">location_on</span>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase-tracking text-on-surface-variant">OUR FLAGSHIP</p>
+<p class="font-bold text-on-background">TREASURE TROVE, BENGALURU</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#AB877B] dark:bg-zinc-950 w-full px-12 py-16 grid grid-cols-1 md:grid-cols-5 gap-12 lg:gap-8">
+<!-- Brand & Newsletter -->
+<div class="md:col-span-2 space-y-6">
+<h2 class="text-lg font-semibold text-[#FAF6EE] uppercase-tracking">TREASURE TROVE</h2>
+<p class="text-[#FAF6EE]/80 text-sm max-w-xs leading-relaxed">Discover curated artifacts and modern heirlooms designed for the conscious collector.</p>
+<div class="pt-4">
+<p class="text-[10px] font-bold text-[#FAF6EE] uppercase-tracking mb-3">NEWSLETTER</p>
+<div class="flex border-b border-[#FAF6EE]/30 pb-2 max-w-sm">
+<input class="bg-transparent border-none focus:ring-0 text-xs text-[#FAF6EE] placeholder:text-[#FAF6EE]/50 w-full" placeholder="YOUR EMAIL" type="email"/>
+<button class="material-symbols-outlined text-[#FAF6EE]">arrow_forward</button>
+</div>
+</div>
+</div>
+<!-- Links Columns -->
+<div class="space-y-6">
+<p class="text-[10px] font-bold text-[#FAF6EE] uppercase-tracking">SHOP</p>
+<ul class="space-y-3">
+<li><a class="text-[13px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">DECOR</a></li>
+<li><a class="text-[13px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">FURNITURE</a></li>
+<li><a class="text-[13px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">LIFESTYLE</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<p class="text-[10px] font-bold text-[#FAF6EE] uppercase-tracking">SUPPORT</p>
+<ul class="space-y-3">
+<li><a class="text-[13px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">TRACK ORDER</a></li>
+<li><a class="text-[13px] text-[#D5C68F] underline" href="#">CONTACT</a></li>
+<li><a class="text-[13px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">HELP</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<p class="text-[10px] font-bold text-[#FAF6EE] uppercase-tracking">LEGAL</p>
+<ul class="space-y-3">
+<li><a class="text-[13px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">POLICIES</a></li>
+<li><a class="text-[13px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">TERMS</a></li>
+<li><a class="text-[13px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">PRIVACY</a></li>
+</ul>
+</div>
+<!-- Copyright -->
+<div class="md:col-span-5 pt-12 border-t border-[#FAF6EE]/10 text-center">
+<p class="text-[11px] font-normal text-[#FAF6EE]/60 uppercase-tracking">Copyright 2026 Treasure Trove. Made in India.</p>
+</div>
+</footer>
+</body></html>

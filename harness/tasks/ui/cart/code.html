@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cart | TREASURE TROVE</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1f1b15",
+                        "on-tertiary-fixed": "#161f00",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#4a473b",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fff8f3",
+                        "outline-variant": "#cdc6b7",
+                        "inverse-surface": "#353029",
+                        "surface-container-low": "#fcf2e8",
+                        "secondary-fixed-dim": "#e6beb0",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#d5c68f",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1f1b15",
+                        "background": "#fff8f3",
+                        "on-secondary-fixed-variant": "#5d4036",
+                        "secondary": "#76574d",
+                        "surface-variant": "#ebe1d7",
+                        "on-secondary-container": "#795a4f",
+                        "on-tertiary-fixed-variant": "#404b24",
+                        "surface": "#fff8f3",
+                        "primary-container": "#d5c68f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#ebe1d7",
+                        "tertiary-fixed": "#dbe8b4",
+                        "inverse-primary": "#d5c68f",
+                        "secondary-container": "#fed4c6",
+                        "primary": "#695e31",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f7ece2",
+                        "on-tertiary-container": "#4b572e",
+                        "on-secondary-fixed": "#2c160e",
+                        "on-primary-fixed": "#221b00",
+                        "surface-container-high": "#f1e6dd",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffdbcf",
+                        "surface-dim": "#e2d8cf",
+                        "tertiary-container": "#bfcc99",
+                        "surface-tint": "#695e31",
+                        "inverse-on-surface": "#faefe5",
+                        "tertiary-fixed-dim": "#bfcc99",
+                        "primary-fixed": "#f2e2a9",
+                        "on-primary-fixed-variant": "#50461b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "sans": ["Poppins", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Poppins', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* No-Line Rule: Boundaries defined by surface shifts */
+        section { border: none !important; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Announcement Bar -->
+<div class="bg-primary text-on-primary py-2 text-center text-[10px] tracking-[0.2em] font-semibold uppercase">
+        Complimentary shipping on orders above Rs. 15,000
+    </div>
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-[#FFFFFF] dark:bg-zinc-900 sticky top-0 z-50 shadow-[0_20px_40px_rgba(31,27,22,0.05)]">
+<div class="max-w-screen-2xl mx-auto px-8 py-6 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="text-xl font-bold text-[#1F1B16] dark:text-[#FAF6EE] tracking-tighter">TREASURE TROVE</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[14px] font-semibold tracking-[0.10em] text-[#1F1B16] dark:text-[#FAF6EE] hover:text-[#D5C68F] transition-colors duration-300" href="#">DECOR</a>
+<a class="text-[14px] font-semibold tracking-[0.10em] text-[#1F1B16] dark:text-[#FAF6EE] hover:text-[#D5C68F] transition-colors duration-300" href="#">BED &amp; BATH</a>
+<a class="text-[14px] font-semibold tracking-[0.10em] text-[#1F1B16] dark:text-[#FAF6EE] hover:text-[#D5C68F] transition-colors duration-300" href="#">KITCHEN &amp; DINING</a>
+<a class="text-[14px] font-semibold tracking-[0.10em] text-[#1F1B16] dark:text-[#FAF6EE] hover:text-[#D5C68F] transition-colors duration-300" href="#">BAR &amp; GLASSWARE</a>
+<a class="text-[14px] font-semibold tracking-[0.10em] text-[#1F1B16] dark:text-[#FAF6EE] hover:text-[#D5C68F] transition-colors duration-300" href="#">FLOWERS &amp; PLANTS</a>
+<a class="text-[14px] font-semibold tracking-[0.10em] text-[#1F1B16] dark:text-[#FAF6EE] hover:text-[#D5C68F] transition-colors duration-300" href="#">OUTDOOR</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[24px] cursor-pointer hover:text-[#D5C68F] transition-colors">person</span>
+<span class="material-symbols-outlined text-[24px] cursor-pointer hover:text-[#D5C68F] transition-colors">favorite</span>
+<div class="relative">
+<span class="material-symbols-outlined text-[24px] cursor-pointer text-[#D5C68F]">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[9px] w-4 h-4 flex items-center justify-center rounded-full">3</span>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8">
+<!-- Page Header -->
+<header class="py-16 text-center">
+<nav class="flex justify-center items-center gap-2 text-[10px] tracking-[0.15em] text-outline uppercase mb-4">
+<a class="hover:text-on-surface" href="#">Home</a>
+<span>/</span>
+<span class="text-on-surface font-semibold">Your Cart</span>
+</nav>
+<h1 class="text-4xl font-bold tracking-tight text-on-surface">YOUR CART (3 ITEMS)</h1>
+</header>
+<!-- Two-Column Body -->
+<div class="grid grid-cols-12 gap-12 pb-24">
+<!-- Left: Line Items (8 cols) -->
+<div class="col-span-12 lg:col-span-8 space-y-12">
+<!-- Line Item 1 -->
+<div class="flex gap-8 group">
+<div class="w-[120px] h-[150px] bg-surface-container overflow-hidden rounded-[4px]">
+<img alt="Handcrafted Ceramic Vase" class="w-full h-full object-cover group-hover:scale-105 duration-500" data-alt="Close-up of a textured matte ceramic vase in soft ivory tones sitting on a wooden surface with soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4LSAeBdRYOPCG8YnTOnmAxuGYM7NvGvJR-gZy5HNRchXZay0aVYa5uIAc1zFc9jvut4I5Fg0RTb04GM9VFAN_t39pevid2B160WqXRA49Y9GzsVxnWn-Y8rDcZditJ6pfUaYaVEPqchcqt-d9U6qvx2DnR5bgTB6qeDpClj6PiUAjZ49aM2yCy3tGbVVVG-Wantwd0551aR-eAmlwPXLZCYgjwG-3l74QF7enPyhnJOec17yRNrlz8THzOGZ5UXkt9tsd3PZZO_yl"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<p class="text-[10px] tracking-[0.15em] text-primary font-bold uppercase mb-1">DECOR</p>
+<h3 class="text-lg font-semibold text-on-surface uppercase tracking-wide">ARTIFACT CERAMIC VASE</h3>
+<p class="text-sm text-outline mt-1 uppercase tracking-[0.05em]">Variant: Midnight Matte / Large</p>
+<div class="flex items-center gap-4 mt-4">
+<button class="text-[10px] tracking-[0.15em] font-semibold text-on-surface uppercase border-b border-transparent hover:border-primary transition-all">REMOVE</button>
+<button class="text-[10px] tracking-[0.15em] font-semibold text-on-surface uppercase border-b border-transparent hover:border-primary transition-all">WISH LIST</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end justify-between text-right w-48">
+<div class="flex items-center border border-outline-variant rounded-[2px] p-1">
+<button class="px-3 py-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="px-3 text-sm font-semibold">1</span>
+<button class="px-3 py-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+<div>
+<p class="text-[10px] text-outline tracking-wider mb-1">UNIT: Rs. 8,500</p>
+<p class="text-lg font-bold text-on-surface">Rs. 8,500</p>
+</div>
+</div>
+</div>
+<!-- Line Item 2 -->
+<div class="flex gap-8 group">
+<div class="w-[120px] h-[150px] bg-surface-container overflow-hidden rounded-[4px]">
+<img alt="Egyptian Cotton Towel Set" class="w-full h-full object-cover group-hover:scale-105 duration-500" data-alt="Stack of thick, plush Egyptian cotton towels in a neutral stone color with elegant woven borders." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-a3B4LonhZDg7knku6Grru4duRkOZH7tsyH-uAP7X2Mwfr7_KQXHF9mAmUYQs9SGiroAH26FAmZndflDZvWYXqzHUVEGshR2k_p-X4ShABF9oF0_tg48OVrseFfSNBTn9CafFUPSAqjAh0CPGCOBRGbpUgQeUfvHNdjJ7hGKUn55pi4zQtToaeg549w3pmQ1W2xiTqu5SvIH__3ueK_lsCgcDv4IZIjqzPwGe_Jf8lpl6_I2FlACejIhkGow8YrsqFQjIJ19Xnw6G"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<p class="text-[10px] tracking-[0.15em] text-primary font-bold uppercase mb-1">BED &amp; BATH</p>
+<h3 class="text-lg font-semibold text-on-surface uppercase tracking-wide">SPA LUXE TOWEL SET</h3>
+<p class="text-sm text-outline mt-1 uppercase tracking-[0.05em]">Variant: Sand / Set of 4</p>
+<div class="flex items-center gap-4 mt-4">
+<button class="text-[10px] tracking-[0.15em] font-semibold text-on-surface uppercase border-b border-transparent hover:border-primary transition-all">REMOVE</button>
+<button class="text-[10px] tracking-[0.15em] font-semibold text-on-surface uppercase border-b border-transparent hover:border-primary transition-all">WISH LIST</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end justify-between text-right w-48">
+<div class="flex items-center border border-outline-variant rounded-[2px] p-1">
+<button class="px-3 py-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="px-3 text-sm font-semibold">2</span>
+<button class="px-3 py-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+<div>
+<p class="text-[10px] text-outline tracking-wider mb-1">UNIT: Rs. 4,200</p>
+<p class="text-lg font-bold text-on-surface">Rs. 8,400</p>
+</div>
+</div>
+</div>
+<!-- Line Item 3 -->
+<div class="flex gap-8 group">
+<div class="w-[120px] h-[150px] bg-surface-container overflow-hidden rounded-[4px]">
+<img alt="Brass Cocktail Shaker" class="w-full h-full object-cover group-hover:scale-105 duration-500" data-alt="Polished vintage-style brass cocktail shaker on a dark marble surface with a spotlight highlighting its metallic texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmb5QsmfFD_c1_JNy0vq9nTC7eyR5iIcpS4i1Xv-8oMIBm-G2iLVHhA-9dSMI6b1p0Wl0YP9g0RKHsZThT8dLQWaJQ9hCNKUPlW2hPZjQRb0mN7F2tlOxfc8UqpjynK6Vj7J7WEXJMiJ76h5GlV4FxOY3lAxir0rVEKz0YsJW1Lx2yi4XIvM_njtOwkdN3CxwvBK6iN_hlaMWaEVyYfSyedtPhk_T4LVQQRlhx3S7hJdKDeDxcVnoEkhyhDAIgSgvS4qYCzg9jtOS-"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<p class="text-[10px] tracking-[0.15em] text-primary font-bold uppercase mb-1">BAR &amp; GLASSWARE</p>
+<h3 class="text-lg font-semibold text-on-surface uppercase tracking-wide">LEGACY BRASS SHAKER</h3>
+<p class="text-sm text-outline mt-1 uppercase tracking-[0.05em]">Variant: Antique Gold</p>
+<div class="flex items-center gap-4 mt-4">
+<button class="text-[10px] tracking-[0.15em] font-semibold text-on-surface uppercase border-b border-transparent hover:border-primary transition-all">REMOVE</button>
+<button class="text-[10px] tracking-[0.15em] font-semibold text-on-surface uppercase border-b border-transparent hover:border-primary transition-all">WISH LIST</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end justify-between text-right w-48">
+<div class="flex items-center border border-outline-variant rounded-[2px] p-1">
+<button class="px-3 py-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="px-3 text-sm font-semibold">1</span>
+<button class="px-3 py-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+<div>
+<p class="text-[10px] text-outline tracking-wider mb-1">UNIT: Rs. 3,274</p>
+<p class="text-lg font-bold text-on-surface">Rs. 3,274</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Order Summary (4 cols) -->
+<aside class="col-span-12 lg:col-span-4">
+<div class="bg-surface-container p-8 rounded-[4px] sticky top-32">
+<h2 class="text-[12px] font-bold tracking-[0.2em] text-on-surface uppercase mb-8">ORDER SUMMARY</h2>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between text-sm uppercase tracking-wide">
+<span class="text-outline">SUBTOTAL</span>
+<span class="font-semibold text-on-surface">Rs. 20,174</span>
+</div>
+<div class="flex justify-between text-sm uppercase tracking-wide">
+<span class="text-outline">GST (12%)</span>
+<span class="font-semibold text-on-surface">INCLUDED</span>
+</div>
+<div class="flex justify-between text-sm uppercase tracking-wide">
+<span class="text-outline">SHIPPING</span>
+<span class="font-semibold text-primary">COMPLIMENTARY</span>
+</div>
+</div>
+<div class="border-t border-outline-variant/30 pt-6 mb-8 flex justify-between items-baseline">
+<span class="text-sm font-bold uppercase tracking-[0.15em]">TOTAL</span>
+<span class="text-2xl font-bold text-primary-fixed-dim">Rs. 20,174</span>
+</div>
+<div class="mb-8">
+<div class="flex gap-2">
+<input class="flex-grow bg-surface-container-lowest border border-outline-variant px-4 py-3 text-[10px] tracking-widest uppercase focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all rounded-[2px]" placeholder="COUPON CODE" type="text"/>
+<button class="bg-on-background text-on-primary px-6 py-3 text-[10px] font-bold tracking-widest uppercase hover:bg-primary transition-colors rounded-[2px]">APPLY</button>
+</div>
+</div>
+<button class="w-full bg-[#D5C68F] text-[#1F1B16] py-5 font-bold tracking-[0.2em] uppercase text-[12px] hover:bg-[#c4b57e] transition-colors duration-300 rounded-[2px] mb-8">
+                        PROCEED TO CHECKOUT
+                    </button>
+<div class="flex justify-center items-center gap-6 opacity-40 grayscale">
+<span class="material-symbols-outlined text-2xl">credit_card</span>
+<span class="material-symbols-outlined text-2xl">account_balance</span>
+<span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+</div>
+</div>
+</aside>
+</div>
+<!-- COMPLETE THE LOOK Section -->
+<section class="py-24 border-t border-outline-variant/10">
+<h2 class="text-2xl font-bold text-center tracking-tight text-on-surface uppercase mb-16">COMPLETE THE LOOK</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-[4px] mb-6">
+<img alt="Velvet Cushion" class="w-full h-full object-cover group-hover:scale-105 duration-700" data-alt="Luxurious deep teal velvet throw cushion with subtle gold embroidery on a minimalist grey sofa." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBFq_GkRERcH_6Ip8c9tEtjhfQo66CBnZ0mM2DqQU8zwb9DpxjiBd0Tv5iTSzjTzOanqsFHxCX2hPTR797uMdDu4_8yFruiH91H0F5YEMf0crb1nIsEbNe9yMvWGg7ktfMeERrp0kG6WCYfUj55jua70okKPPVRFXpNgF4IEqt2sXYANQpuv6q0kpnRgVdneOciA-JE5T932ry3OZf3fcCDaxTvsuHrGwumYdx8Vz8u0POKZq9ND7kI2SX9qqYWJuudshs_DvyqvDb"/>
+</div>
+<p class="text-[9px] tracking-[0.2em] text-outline uppercase mb-2">DECOR</p>
+<h3 class="text-sm font-semibold uppercase tracking-widest mb-2">EMERALD VELVET CUSHION</h3>
+<p class="text-primary font-bold text-sm tracking-wide">Rs. 2,450</p>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-[4px] mb-6 relative">
+<img alt="Scented Candle" class="w-full h-full object-cover group-hover:scale-105 duration-700" data-alt="Premium soy wax candle in a smoked glass jar with a minimalist label on a dark wooden coaster." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfue2bbar_v9UlJijfV5POERLtZCfsNnJ-M3AXbjannCAceO2F6QTdZzh0BO4HiBkuHv8t5zLKfgM9zHRuhlRzICbpCVEpxcoxP4pEqraC5S-C9WQ-Ku-mqtF_M7AblmtcJeLGGHoPGqxh12lFwlTH7sHgYDuIsnsllG-Hg81bQXtM50esbr2cql0MIlhv5_6m8sKcIAI9xmTfVsCc5W76E_9WjCQ6eGmg56tNtBRylRBGiSgnE-oMNqesdiqfEmyXt3JtXaccWDkt"/>
+<div class="absolute top-4 left-4 bg-[#B45A3C] text-white text-[9px] font-bold px-3 py-1 tracking-widest uppercase">RARE</div>
+</div>
+<p class="text-[9px] tracking-[0.2em] text-outline uppercase mb-2">HOME FRAGRANCE</p>
+<h3 class="text-sm font-semibold uppercase tracking-widest mb-2">CEDARWOOD &amp; OUD CANDLE</h3>
+<p class="text-primary font-bold text-sm tracking-wide">Rs. 3,100</p>
+</div>
+<!-- Product Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-[4px] mb-6">
+<img alt="Linen Napkins" class="w-full h-full object-cover group-hover:scale-105 duration-700" data-alt="Hand-woven linen napkins in an earthy ochre color arranged neatly on a rustic wooden table." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnybqyM0BzXr1Vn8r2ClPgMkqkA5DhIYIuz4woTM5oh9Oi60yj_xnyUGqAY7TIZEHW5A5ig4c8jOYqbu3qYG_b5IC1MzxwyIb54ioiot81Q3_7rIY-8bbURm0IrbC0l6qino9X3nby3EpmTBXfTag6yOGkakU0hDX7SDY_9PhHRe7z_ucu8MOx2lYDNCO-ZTSCIQZBUTxRMa9yyrjPx6KkoZktzSIvBCvFlDKFdZBmiq9Hdi0F-CaHJpy5BOslne6bthlJ3HiVkxTZ"/>
+</div>
+<p class="text-[9px] tracking-[0.2em] text-outline uppercase mb-2">KITCHEN</p>
+<h3 class="text-sm font-semibold uppercase tracking-widest mb-2">OCHRE LINEN NAPKINS (SET OF 6)</h3>
+<p class="text-primary font-bold text-sm tracking-wide">Rs. 1,850</p>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-[4px] mb-6">
+<img alt="Gold Serving Tray" class="w-full h-full object-cover group-hover:scale-105 duration-700" data-alt="A round brushed gold serving tray with contemporary handles reflecting warm ambient light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjgxyr9zGTJzSyosql3hPGFGyTW4NCmI25iAcicOhuLTF_neiWE3hlp4WW5XRuV7ctTM3gkkDeOSeWapDjbXOgceBiiO5Sgsi-xEI-U8UALGI0UeNjDkxqQSrcyvKpHzH7e5IMZYK7CQpau_uPOv2pjg9dl9aDRLH0FL7kORAdpJFdlj3kF1MXSi5jOC9VgwGaoZGN4dUuCOTJ9Qrca-S0RGd0sedtdoDf2dlAnxDkfFZADsEESXTtLnh-h2HKSQAOvo2Kz8Kt25n_"/>
+</div>
+<p class="text-[9px] tracking-[0.2em] text-outline uppercase mb-2">BAR &amp; GLASSWARE</p>
+<h3 class="text-sm font-semibold uppercase tracking-widest mb-2">BRUSHED GOLD SERVICE TRAY</h3>
+<p class="text-primary font-bold text-sm tracking-wide">Rs. 5,900</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Newsletter Band -->
+<div class="bg-surface-container py-20 text-center">
+<div class="max-w-2xl mx-auto px-8">
+<h2 class="text-3xl font-bold tracking-tight mb-4 uppercase">JOIN THE COLLECTIVE</h2>
+<p class="text-outline text-sm tracking-wide mb-10 leading-relaxed uppercase">Be the first to discover our latest heirlooms and exclusive editorial releases.</p>
+<form class="flex border-b border-on-surface/20 pb-2">
+<input class="bg-transparent border-none focus:ring-0 flex-grow text-sm tracking-[0.1em] placeholder:text-outline uppercase" placeholder="YOUR EMAIL ADDRESS" type="email"/>
+<button class="text-xs font-bold tracking-[0.2em] uppercase hover:text-primary transition-colors" type="submit">SUBSCRIBE</button>
+</form>
+</div>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="bg-[#AB877B] dark:bg-zinc-950 w-full px-12 py-16 grid grid-cols-1 md:grid-cols-5 gap-12">
+<div class="col-span-1 md:col-span-2">
+<div class="text-lg font-semibold text-[#FAF6EE] mb-6 tracking-tight">TREASURE TROVE</div>
+<p class="text-[12px] leading-loose text-[#FAF6EE]/80 max-w-xs uppercase tracking-[0.05em]">
+                Curating timeless Indian craftsmanship for the contemporary home. Each piece is a modern heirloom designed to last generations.
+            </p>
+</div>
+<div>
+<h4 class="text-[10px] font-bold tracking-[0.2em] text-[#FAF6EE] uppercase mb-6">SHOP</h4>
+<ul class="space-y-3">
+<li><a class="text-[12px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all tracking-[0.10em] uppercase" href="#">DECOR</a></li>
+<li><a class="text-[12px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all tracking-[0.10em] uppercase" href="#">BED &amp; BATH</a></li>
+<li><a class="text-[12px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all tracking-[0.10em] uppercase" href="#">KITCHEN</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-[10px] font-bold tracking-[0.2em] text-[#FAF6EE] uppercase mb-6">HELP</h4>
+<ul class="space-y-3">
+<li><a class="text-[12px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all tracking-[0.10em] uppercase" href="#">TRACK ORDER</a></li>
+<li><a class="text-[12px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all tracking-[0.10em] uppercase" href="#">CONTACT</a></li>
+<li><a class="text-[12px] text-[#FAF6EE] hover:text-[#D5C68F] transition-all tracking-[0.10em] uppercase" href="#">POLICIES</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-[10px] font-bold tracking-[0.2em] text-[#FAF6EE] uppercase mb-6">SOCIAL</h4>
+<div class="flex gap-4">
+<a class="text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+</div>
+</div>
+<div class="col-span-full border-t border-[#FAF6EE]/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-[10px] tracking-[0.10em] text-[#FAF6EE]/60 uppercase">Copyright 2026 Treasure Trove. Made in India.</p>
+<div class="flex gap-8">
+<span class="text-[10px] text-[#FAF6EE]/60 tracking-[0.1em]">PRIVACY</span>
+<span class="text-[10px] text-[#FAF6EE]/60 tracking-[0.1em]">TERMS</span>
+</div>
+</div>
+</footer>
+</body></html>

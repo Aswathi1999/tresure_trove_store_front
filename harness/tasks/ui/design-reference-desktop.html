@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Treasure Trove — Desktop Design Reference (Home)</title>
+
+<!-- Tailwind v3 Play CDN (good enough for design reference; project uses Tailwind v4) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Mulish font (project font) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<!-- Material Symbols (used for all icons) -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+<style>
+  /* ─── Brand color tokens (mirrors src/app/globals.css @theme block) ─── */
+  :root {
+    --color-on-background: #1f1b15;
+    --color-on-surface-variant: #4a473b;
+    --color-on-primary: #ffffff;
+    --color-surface-bright: #fff8f3;
+    --color-outline-variant: #cdc6b7;
+    --color-outline: #7c7768;
+    --color-surface-container-low: #fcf2e8;
+    --color-secondary: #76574d;
+    --color-surface-variant: #ebe1d7;
+    --color-on-secondary-container: #795a4f;
+    --color-surface: #fff8f3;
+    --color-primary-container: #d5c68f;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-highest: #ebe1d7;
+    --color-inverse-primary: #d5c68f;
+    --color-primary: #695e31;
+    --color-surface-container: #f7ece2;
+    --color-surface-container-high: #f1e6dd;
+    --color-surface-dim: #e2d8cf;
+    --color-tertiary-container: #bfcc99;
+  }
+
+  /* ─── Brand palette (used in the app) ─────────────────────────────
+     Background page:   #FAF6EE      (warm cream)
+     Ink / primary text: #1F1B16     (espresso)
+     Body text muted:    #4A443D
+     Brand orange:       #B45A3C     (CTA accents, prices, ribbons)
+     Brand gold:         #D5C68F     (links, hover, badges)
+     Brand brown:        #795a4f     (offer ribbons)
+     Brand dusty-rose:   #AB877B     (footer)
+     Off-white:          #FAF6EE     (text on dark)
+  */
+
+  html, body { font-family: 'Mulish', ui-sans-serif, system-ui, sans-serif; }
+  body { background-color: #FAF6EE; color: #1f1b15; }
+
+  .tracking-widest-ui { letter-spacing: 0.10em; }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+</style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESKTOP HEADER  (mirrors src/components/Navbar.tsx — "full" mode)
+     Layers in source: offer strip → logo + search + icons → nav links
+     Note: in-app this nav also collapses to a floating "island" pill
+           on scroll-up (rgba(31,27,22,0.92) bg, rounded-full). Not shown
+           here since reference snapshots the top-of-page state.
+     ════════════════════════════════════════════════════════════════ -->
+<header class="w-full bg-white shadow-[0_10px_40px_rgba(31,27,22,0.06)]">
+  <!-- Offer strip -->
+  <div class="bg-[#1F1B16] text-[#FAF6EE] text-center text-[11px] font-semibold tracking-widest-ui uppercase py-2">
+    FREE SHIPPING ON ORDERS OVER RS. 999 · 7-DAY RETURNS
+  </div>
+
+  <div class="max-w-screen-2xl mx-auto px-8 py-4">
+    <div class="flex items-center justify-between w-full mb-4">
+      <div class="flex items-center gap-6">
+        <a href="#" class="flex items-center gap-3 shrink-0">
+          <div class="w-9 h-9 rounded-full bg-[#1F1B16] text-[#D5C68F] flex items-center justify-center font-bold text-sm">TT</div>
+          <span class="text-xl font-bold text-[#1F1B16] tracking-tight">TREASURE TROVE</span>
+        </a>
+        <button class="flex items-center gap-2 bg-[var(--color-surface-container)] px-4 py-2 rounded-lg w-72 cursor-pointer hover:bg-[var(--color-surface-container-high)] transition-colors">
+          <span class="material-symbols-outlined text-[var(--color-outline)] text-lg">search</span>
+          <span class="text-sm text-[var(--color-outline)]">Search lamps, planters, decor…</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-6">
+        <span class="material-symbols-outlined cursor-pointer hover:text-[#D5C68F] duration-200">person</span>
+        <span class="material-symbols-outlined cursor-pointer hover:text-[#D5C68F] duration-200">favorite</span>
+        <a href="#" class="relative group flex items-center">
+          <span class="material-symbols-outlined cursor-pointer group-hover:text-[#D5C68F] duration-200">shopping_bag</span>
+          <span class="absolute -top-1 -right-1 bg-[var(--color-primary)] text-[var(--color-on-primary)] text-[9px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
+        </a>
+      </div>
+    </div>
+    <!-- Category nav -->
+    <nav class="flex items-center justify-center gap-10 overflow-x-auto hide-scrollbar pb-1">
+      <a href="#" class="text-sm font-semibold tracking-widest-ui uppercase text-[#1F1B16] hover:text-[#D5C68F] transition-colors duration-300 whitespace-nowrap">DECOR</a>
+      <a href="#" class="text-sm font-semibold tracking-widest-ui uppercase text-[#1F1B16] hover:text-[#D5C68F] transition-colors duration-300 whitespace-nowrap">BED &amp; BATH</a>
+      <a href="#" class="text-sm font-semibold tracking-widest-ui uppercase text-[#1F1B16] hover:text-[#D5C68F] transition-colors duration-300 whitespace-nowrap">KITCHEN &amp; DINING</a>
+      <a href="#" class="text-sm font-semibold tracking-widest-ui uppercase text-[#1F1B16] hover:text-[#D5C68F] transition-colors duration-300 whitespace-nowrap">BAR &amp; GLASSWARE</a>
+      <a href="#" class="text-sm font-semibold tracking-widest-ui uppercase text-[#1F1B16] hover:text-[#D5C68F] transition-colors duration-300 whitespace-nowrap">FLOWERS &amp; PLANTS</a>
+      <a href="#" class="text-sm font-semibold tracking-widest-ui uppercase text-[#1F1B16] hover:text-[#D5C68F] transition-colors duration-300 whitespace-nowrap">OUTDOOR</a>
+      <a href="#" class="text-sm font-semibold tracking-widest-ui uppercase text-[#1F1B16] hover:text-[#D5C68F] transition-colors duration-300 whitespace-nowrap">LIGHTING</a>
+      <a href="#" class="text-sm font-semibold tracking-widest-ui uppercase text-[#1F1B16] hover:text-[#D5C68F] transition-colors duration-300 whitespace-nowrap">ACCESSORIES</a>
+    </nav>
+  </div>
+</header>
+
+<main class="flex-grow">
+
+  <!-- ═══ Section 1: Hero (65% carousel + 35% editor's pick) ═══ -->
+  <section class="w-full mx-auto h-[540px] flex flex-row overflow-hidden mt-8">
+    <div class="w-[65%] relative bg-zinc-100 overflow-hidden h-full">
+      <img class="w-full h-full object-cover" alt="Hero — handcrafted brass lighting"
+           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrgvJND8ap_jOP_2oWq8CWVTPSJsruDul6JebEsM5O-FVgiCUzbExLlBvedjGTk7Mqo6oFHCObcnY_gZUAdKyLC_HjdtKfENCtHDWk-wbfb58i5ketMKUeMxpARNrAxe30kzV0UbzGgHTQGgP-VysOkhxrCbugpLsFH0BvJgOQDMppV0LJpTZhEVbWj3DG0gBZCTguyAQ6f1A85ZwgDj0rYSPAxdnc6Bd_EMqYYVNu-z195ErQqe4fUhM3tMgjRQYaNyGutxvbrdml" />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/55 via-black/15 to-transparent flex flex-col justify-center px-16">
+        <span class="text-[#D5C68F] text-xs font-bold tracking-widest-ui uppercase mb-3">NEW SEASON · 2026</span>
+        <h1 class="text-white text-5xl font-bold leading-tight max-w-xl mb-4">Modern Heirlooms,<br/>Handcrafted in India</h1>
+        <p class="text-white/80 max-w-md text-base mb-8">Discover lighting, planters, and tableware curated from artisan studios across the country.</p>
+        <a href="#" class="w-fit bg-[#D5C68F] text-[#1F1B16] px-10 py-4 font-bold tracking-widest-ui uppercase text-sm rounded-[2px] hover:bg-[#caba80] transition-all">SHOP NEW ARRIVALS</a>
+      </div>
+    </div>
+    <div class="w-[35%] relative overflow-hidden h-full">
+      <img class="w-full h-full object-cover" alt="Editor's pick — brass pendant"
+           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrgvJND8ap_jOP_2oWq8CWVTPSJsruDul6JebEsM5O-FVgiCUzbExLlBvedjGTk7Mqo6oFHCObcnY_gZUAdKyLC_HjdtKfENCtHDWk-wbfb58i5ketMKUeMxpARNrAxe30kzV0UbzGgHTQGgP-VysOkhxrCbugpLsFH0BvJgOQDMppV0LJpTZhEVbWj3DG0gBZCTguyAQ6f1A85ZwgDj0rYSPAxdnc6Bd_EMqYYVNu-z195ErQqe4fUhM3tMgjRQYaNyGutxvbrdml" />
+      <div class="absolute bottom-6 left-6 bg-[var(--color-surface-container-lowest)] p-6 w-[260px] rounded-lg shadow-lg">
+        <span class="text-xs font-bold tracking-widest-ui text-[var(--color-outline)] uppercase block mb-1">EDITOR'S PICK</span>
+        <h3 class="text-xl font-bold mb-3">The Lighting Edit</h3>
+        <a href="#" class="text-[#D5C68F] font-bold text-xs tracking-widest-ui uppercase flex items-center gap-2 hover:opacity-80 transition-opacity">
+          EXPLORE <span class="material-symbols-outlined text-sm">chevron_right</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 2: Trust Strip ═══ -->
+  <section class="w-full bg-[#F2ECDD] h-16 flex items-center justify-center mt-12">
+    <div class="max-w-[1280px] w-full px-8 flex flex-nowrap justify-between">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-[var(--color-secondary)]">local_shipping</span>
+        <span class="text-xs font-semibold tracking-widest-ui uppercase">Free Shipping</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-[var(--color-secondary)]">assignment_return</span>
+        <span class="text-xs font-semibold tracking-widest-ui uppercase">7-Day Returns</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-[var(--color-secondary)]">lock</span>
+        <span class="text-xs font-semibold tracking-widest-ui uppercase">Secure Payments</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-[var(--color-secondary)]">payments</span>
+        <span class="text-xs font-semibold tracking-widest-ui uppercase">COD Available</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 3: Shop by Category (8 round tiles) ═══ -->
+  <section class="py-24 text-center max-w-[1280px] mx-auto">
+    <h2 class="text-[40px] font-bold mb-2">Shop by Category</h2>
+    <p class="text-[var(--color-outline)] mb-12">Explore our meticulously curated world of handcrafted treasures.</p>
+    <div class="grid grid-cols-8 gap-6 px-8">
+      <!-- 8 round category tiles -->
+      <a href="#" class="flex flex-col items-center gap-4 group cursor-pointer">
+        <div class="w-[104px] h-[104px] rounded-full overflow-hidden bg-[var(--color-surface-container)] shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500">
+          <img class="w-full h-full object-cover" alt="DECOR" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqBYcBQSK8OBGzwuWhcwf6yoOh3uFTEDVKtt2rqF7bE_9MwPRFDjAzPkldGrEPYMachhn4540KTfhWrf_TIj30eQzvReyvnzTJOPImR37x_ZMLp2dtCo8O8gYDClOeQw2gdfhBlFW4Jz6haFeYqccOaN7rBrYllOsThLXksEyIlPDmEir3C1P1JHWOHbF7Bd7HYoZzXBQCIO-HLdG-24K0q6pa5VwnJgG_0Twv9f5v-nQIY-KFHOloTb2-M8Sa5kTR3dqeZvgAxx1l" />
+        </div>
+        <span class="text-[11px] font-bold tracking-widest-ui uppercase group-hover:text-[#B45A3C] transition-colors">DECOR</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-4 group cursor-pointer">
+        <div class="w-[104px] h-[104px] rounded-full overflow-hidden bg-[var(--color-surface-container)] shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500">
+          <img class="w-full h-full object-cover" alt="BED & BATH" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqG7MR5h1mr-EBbdHy2Odr2pLQ44kM4f2jchyRdGFgkD4bxap3qguWJczX3gdzA0ftuQP0UFGST5GVUUQFkptay25S0Ndz1F7PxLnDDxBqcLWUq7IUqZalAtjFeaXTeahiJmrF5Kb6M5sREY9MEOQB-90vQ7BYOZmAMgYt9_CrOCSJYq1uEHVHKQyuDhkJIxw5mUiGxp08p2WWMak8A-wZ0hhAD1FpuntHq0uohrjzf8VTK8RPCyI8Zl9vZ1vnvow8xW1wPwpSzYYP" />
+        </div>
+        <span class="text-[11px] font-bold tracking-widest-ui uppercase group-hover:text-[#B45A3C] transition-colors">BED &amp; BATH</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-4 group cursor-pointer">
+        <div class="w-[104px] h-[104px] rounded-full overflow-hidden bg-[var(--color-surface-container)] shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500">
+          <img class="w-full h-full object-cover" alt="KITCHEN" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3bDK8HjyMLBqjq11CBmEuifVPP1dlcFdm3Pby71BBNr_XqurargT27rp0p7IADn_ZWBYw4e_Tub_ULmd0TFZN0GKQJJbc_GROJ25_QJ-Ca2-F-H9d_PTvx8BnsrdHU1jY__gLmLZ9YLqr_mKwoqoi2tV-5R0USDUBOWWuO15vftsVDrBpnyiDtipwu7cHZXHSmvNHPHmIVaka1QwRCPAkk8aIoe35IYHufp_R13yBsxmq2KcntO96Zz_r1CTBQCfPZp8xQtq7KKLr" />
+        </div>
+        <span class="text-[11px] font-bold tracking-widest-ui uppercase group-hover:text-[#B45A3C] transition-colors">KITCHEN</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-4 group cursor-pointer">
+        <div class="w-[104px] h-[104px] rounded-full overflow-hidden bg-[var(--color-surface-container)] shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500">
+          <img class="w-full h-full object-cover" alt="GLASSWARE" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy_B7Co2pnY-mp5n4crXHR2pAzCDWPWL5UV23yPNf4gfL1GxilYTvcQmQtX5o1kVe5vXHp7fQMdndfc0qLSbn8TaS_r85qhDW6ay8jJREQg3EGs8Fer6lyNUvm6MljAo26Hc_FIlAzRErACASCj0xyOmbdkBBvd1n9gpBiP6uz6pNpKe0sghle55twrT_wHjvQfer25tIYJ1ZpmPjOaKwi_zlBA5bNBfwCmXFxk0R2W7IKT-vL1Cbd2fkT9L6Jiw7uAUX7u7cy6aVK" />
+        </div>
+        <span class="text-[11px] font-bold tracking-widest-ui uppercase group-hover:text-[#B45A3C] transition-colors">GLASSWARE</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-4 group cursor-pointer">
+        <div class="w-[104px] h-[104px] rounded-full overflow-hidden bg-[var(--color-surface-container)] shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500">
+          <img class="w-full h-full object-cover" alt="PLANTS" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH1nXqUPFU_jZXLZabM1y1I-ywZl_YdaaWXbK2HjZEEsWLURzvTI0mGYQfpZg176Mjf5sN8CnUfacfaNpB0WQPIKvbNImuX0Gnj6_QquiyDZLJId7l4GvLZHf96i3PLHNXv4Icc1MJpZA5WnJ8fwmUYhQqsuZWnU_xJTtQwFemjaNn96tHfVWzGtjsYYzR7YT3vw1CzgWpVX_uLF3fkOloQg8m6S86fBRSSYJ0-JkeUassH1MvaFfdTVM3k77AaluahrPK1kZ8GgoP" />
+        </div>
+        <span class="text-[11px] font-bold tracking-widest-ui uppercase group-hover:text-[#B45A3C] transition-colors">PLANTS</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-4 group cursor-pointer">
+        <div class="w-[104px] h-[104px] rounded-full overflow-hidden bg-[var(--color-surface-container)] shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500">
+          <img class="w-full h-full object-cover" alt="OUTDOOR" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs6mltbXkRNOmJucOT97PnLn3kh--OkibzN47-q_nY5nTonbeFFmUcaaPOCP6tgB5Tp2nCRaeE_m7zF92yUp3-SMncLhq_Z1cDnIn3ACAQY9Lpb0HDldw2W81izmsWLh0vQDCKAnUBoiOHGN1b3xpRNSPeguvzHenmGkl-QE8olCKjr2QZuQTK1ja4KmNFu11PwpsDX-JQPerxO0Yc1vKs9D44SKNaeJXIoMQHHAltOWsFkAFDZZUk2bb2BqwcgB6Zj3WfZHfMV6Z_" />
+        </div>
+        <span class="text-[11px] font-bold tracking-widest-ui uppercase group-hover:text-[#B45A3C] transition-colors">OUTDOOR</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-4 group cursor-pointer">
+        <div class="w-[104px] h-[104px] rounded-full overflow-hidden bg-[var(--color-surface-container)] shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500">
+          <img class="w-full h-full object-cover" alt="LIGHTING" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2A_bMriIenjXbc-TJUVi6Ly3AhLTwFvsdFpO6Hkj2lr3KFA-76ucKvz4VoBiEbVLqZmna8Ndz_bLE-UQBGWAbTVsEfavlltqefslhjn_wyKmLxGYF8McsyHjvx9GGPZnhYcIt2AyxzYTnae89Xb1481u-RUo1suRg66wXsh0uJeD3GWx1q_74va8yuSUiiAG9qHdP_2z5PyQxrZVvNx6D9HN30c1n4MN0YvpN2SvRmasoAowMSzOVdldbg_Qsg1bWSLgcunW9-jVZ" />
+        </div>
+        <span class="text-[11px] font-bold tracking-widest-ui uppercase group-hover:text-[#B45A3C] transition-colors">LIGHTING</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-4 group cursor-pointer">
+        <div class="w-[104px] h-[104px] rounded-full overflow-hidden bg-[var(--color-surface-container)] shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500">
+          <img class="w-full h-full object-cover" alt="ACCESSORIES" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDETPgdf71I1GFSHL3YroFgqJYcPIf1I6qOB8YuQPTA-9w7dU_e3UV91nQSH_CZTBnjMD4jpCc6K-F8Qdgt9Welbr8RkABkhpm8lfGyVD6ehr0eWmGtKSlzJmlTC797dhiOvQhjazVW5o5vGS2UWgY66JWnYUGXvNbM9idGZpWXG5HeysTiImrX1Adlfq2bvXAZ5hxZnI9gvF6-uR_v0zx32wZx7jPDCwMfL4p61JD9TLAEN8drU99kWwXzMlBUzKr5EWuT6GjMpwl0" />
+        </div>
+        <span class="text-[11px] font-bold tracking-widest-ui uppercase group-hover:text-[#B45A3C] transition-colors">ACCESSORIES</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ Section 4: Bestsellers (4-col product grid) ═══ -->
+  <section class="py-24 bg-[var(--color-surface-container)] text-center px-8">
+    <h2 class="text-[40px] font-bold mb-2">Bestsellers</h2>
+    <p class="text-[var(--color-outline)] text-base mb-16">The pieces our community loves the most.</p>
+    <div class="max-w-[1280px] mx-auto grid grid-cols-4 gap-8 mb-16">
+
+      <a href="#" class="flex flex-col text-left group">
+        <div class="relative bg-white aspect-[4/5] mb-6 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Halden Brass Pendant Lamp"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCANOptNKLqqXac6npIqILD4NXdVoZuS08iNpILkUUEnZZkfGFDYmwTK_A2Sfpw0P7dIGUKXXiECV-HU8ZLtkZDwiQwlQdbPl5ctax5hE24RGTIdiDqQFtX68qtGy4mIIciNgpowYqjojjmd6CCJoLxMlpo7aPunhpVZeujaMzV7Sh5Bw_mg8a27hc_ZDpwRtgLkKvtiK2RQIzSGYnBka9Rhho_aTrnf-Vn6NO2VnYFXVVYBLobHZqk7KagK86xsEN2fU3HygrddwVP" />
+          <span class="absolute top-4 left-4 bg-[#B45A3C] text-white text-[10px] font-bold tracking-widest-ui px-3 py-1 uppercase rounded-sm">BESTSELLER</span>
+        </div>
+        <h5 class="text-base font-bold mb-1 group-hover:text-[#B45A3C] transition-colors">Halden Brass Pendant Lamp</h5>
+        <p class="text-sm font-semibold text-[#4A443D]">Rs. 12,499</p>
+      </a>
+
+      <a href="#" class="flex flex-col text-left group">
+        <div class="relative bg-white aspect-[4/5] mb-6 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Linen Table Runner"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo4OVwzuFK5Kcl4Fv6YgNm50PiIOs5D0Eb1dYidSAJ4m6ujDXxYt4n8o_ufgfZCniF-2GWRV3ufMA6pZe0fEe5_ZFTUQoqG8yhoe6mTvlz3HySvk5kkPGIr6GxXok9r2RnB2QtYot4xibhZ-y6LVUe8NLmoHhqaRbY_qtDHf86pdGHtYKIgyP1kKJkUEEvTcySIZNVSgyDzdQAIrJZ_BAUB6hKHVP9VSfPcc3LestCEzEOQSpvTb9VNCQ8nEmvE99Y5ZBUBliWe6N4" />
+          <span class="absolute top-4 left-4 bg-[#795a4f] text-white text-[10px] font-bold tracking-widest-ui px-3 py-1 uppercase rounded-sm">-20%</span>
+        </div>
+        <h5 class="text-base font-bold mb-1 group-hover:text-[#B45A3C] transition-colors">Linen Table Runner</h5>
+        <p class="text-sm font-semibold text-[#4A443D]">Rs. 1,899</p>
+      </a>
+
+      <a href="#" class="flex flex-col text-left group">
+        <div class="relative bg-white aspect-[4/5] mb-6 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Stoneware Dinner Plate"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8oXPpbc7KUC4UrIt0Dm2NEy0mE5ZESFd51HYN8zYm5w0vGD4KMvdWHflTLXBUFcRzP910fMDPQoGZdgDak86QsiURNwrjEb0dsVGewVb9cGni-mNn3KjPD4NeGJ2fc6oSITw1k-oILM8iMQrE4YMB7VI8XWw6g5eA42TibKXGKNCFM0iYPHHwuvzS4IS3ROmFFEI3q3wFevbFlefXSGPMAq5bdD6ICW6wQ3Buf7h-wsqS54hgef2WL8pSLhNVaPo3pEkhe7oOmGg8" />
+        </div>
+        <h5 class="text-base font-bold mb-1 group-hover:text-[#B45A3C] transition-colors">Stoneware Dinner Plate</h5>
+        <p class="text-sm font-semibold text-[#4A443D]">Rs. 699</p>
+      </a>
+
+      <a href="#" class="flex flex-col text-left group">
+        <div class="relative bg-white aspect-[4/5] mb-6 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terracotta Garden Planter"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhILr_TMU7gK1FkE4QBKh8SZ4dGRE7YdTL9Ei_llHiN7E9xpfpxX7oDNGF0JQTD1ny86CRCtuQhfPs8F_j7olgLIgF5rKesHG71NBtAQNuBgwXJLuJWhWlqPVkV2tI05MX7ykW_P2HrjyDjoMaWbsNylz2D9uv47xASlBrHE5Bb--XJtdMULP2u14bOUdhnCwVLJzWXL5w9kONBFUGTuamx7UyhWT9Ebk_iS0_ZivVfDxvWbljY4IOTY2-aiaZMnL4smzkvsqR786b" />
+          <span class="absolute top-4 left-4 bg-[#D5C68F] text-[#1F1B16] text-[10px] font-bold tracking-widest-ui px-3 py-1 uppercase rounded-sm">NEW</span>
+        </div>
+        <h5 class="text-base font-bold mb-1 group-hover:text-[#B45A3C] transition-colors">Terracotta Garden Planter</h5>
+        <p class="text-sm font-semibold text-[#4A443D]">Rs. 2,299</p>
+      </a>
+
+    </div>
+    <a href="#" class="inline-block px-12 py-4 border-2 border-[#E6DFCC] text-[#1F1B16] font-bold tracking-widest-ui uppercase text-xs rounded-[2px] hover:bg-white hover:border-[#D5C68F] transition-all duration-500">
+      VIEW ALL BESTSELLERS
+    </a>
+  </section>
+
+  <!-- ═══ Section 5: Large Tile Grid (4-col category cards) ═══ -->
+  <section class="py-24 max-w-[1280px] mx-auto px-8">
+    <div class="grid grid-cols-4 gap-6">
+
+      <a href="#" class="bg-[var(--color-surface-container-lowest)] overflow-hidden rounded-lg group h-[420px] flex flex-col shadow-sm hover:shadow-xl transition-shadow">
+        <div class="h-[360px] overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-105 duration-500" alt="Decor"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB18pFWv0F8nCk7hca-xfGeSAjmJYAPLKTe2xFxlOsRIgzupprVn8Td-Mr_J0_6K88dLbI_USu1r8NWITOuX5Y073K6pADYTvCPb-kdAniL7ulEMOkC4uSrxozgVx8cDur6xeiGIZRtkTgm0JD5VS19mtfNGFwXqrZ8VM52Z11fBIcrt2d2Q2pWNWubeVUMaiu476IYboV-KGgSkuYZSX6EbenkZcZUQzgzW3VKe_Z7aGUzrweGLuFq8fZsixKCFID6C16z-osX_PQ" />
+        </div>
+        <div class="flex-grow flex items-center justify-between px-6">
+          <span class="font-bold tracking-widest-ui text-sm uppercase">Decor</span>
+          <span class="text-[#D5C68F] font-bold text-[10px] tracking-widest-ui uppercase">SHOP NOW &gt;</span>
+        </div>
+      </a>
+
+      <a href="#" class="bg-[var(--color-surface-container-lowest)] overflow-hidden rounded-lg group h-[420px] flex flex-col shadow-sm hover:shadow-xl transition-shadow">
+        <div class="h-[360px] overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-105 duration-500" alt="Bed & Bath"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjdfglh5z-vIjWyQEkxrqRvYNoQeIzoqguwr_YLMJDOpICw0jr1N1Ov5B0jxux8rzK3pm3HHzwf2MS_h-SQUFov95Unk-gcmIu5tcwAVEiNtWWtu7W92YRVeQ8GKAqiYUmmtZAJd7r4qhuf3I08W8M_mHYneebc7k0gOrDo3j6PGibwrxbl6wEPTC0xeAXv1-OJdx8KL9Qy4GgjIE60iL5gnGLSKP4f2sK6fqUxc9tP3YZHkFLry_ZOmNVVTyEQq5AjYmWKsPeiESn" />
+        </div>
+        <div class="flex-grow flex items-center justify-between px-6">
+          <span class="font-bold tracking-widest-ui text-sm uppercase">Bed &amp; Bath</span>
+          <span class="text-[#D5C68F] font-bold text-[10px] tracking-widest-ui uppercase">SHOP NOW &gt;</span>
+        </div>
+      </a>
+
+      <a href="#" class="bg-[var(--color-surface-container-lowest)] overflow-hidden rounded-lg group h-[420px] flex flex-col shadow-sm hover:shadow-xl transition-shadow">
+        <div class="h-[360px] overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-105 duration-500" alt="Kitchen & Dining"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX4vZU0SJ3HH0tNUc1RA3oFuZk4B8jZbqLGoychMwg2TUho-R2aAJ_lb0pLOhKHcH3aWnXgAfB4SUUt85baBPM42ZS1JhsJXu6Zro73_DSZUp_6kNonr3mVbdMQd80eQRJj-YHiN92zgUGFZxcHLFsQleCpjUsB8V7ITgxLfrEJofV2uDHTEtdJPcyyLt56gU2pqPSu5WinwpjwbN2xkmZEXGZ5JanzEB8q_LyV9w9RBMjfkU2K0OMnbdV91qCVpNpwhTECFQPHsmc" />
+        </div>
+        <div class="flex-grow flex items-center justify-between px-6">
+          <span class="font-bold tracking-widest-ui text-sm uppercase">Kitchen &amp; Dining</span>
+          <span class="text-[#D5C68F] font-bold text-[10px] tracking-widest-ui uppercase">SHOP NOW &gt;</span>
+        </div>
+      </a>
+
+      <a href="#" class="bg-[var(--color-surface-container-lowest)] overflow-hidden rounded-lg group h-[420px] flex flex-col shadow-sm hover:shadow-xl transition-shadow">
+        <div class="h-[360px] overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-105 duration-500" alt="Bar & Glassware"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4krk2JRZSX24qC17rRN02uqSJku8_tZx8RxK2_2aUIEu5DIFigSAZnmZReS2Fgn78X7RymMQ5R3NRWzfzv4hjiCogtbzjZnvNcMHv9T0NyA8zQiOOJMTRf0A9ProOAZZFEWdUN4QbyZYO4Mx3fF4Vgk6EEwhtI7BHMJNVSk5s9Cy7lDYSccf2eVW0-2FypgqpuOq0J4qiV5Ss9OSIwhFGsOt8nsI4d_dPjJuvoptoMGH1aZJ-LKNZNNcE8OfC8pGFm828QJLcmSwO" />
+        </div>
+        <div class="flex-grow flex items-center justify-between px-6">
+          <span class="font-bold tracking-widest-ui text-sm uppercase">Bar &amp; Glassware</span>
+          <span class="text-[#D5C68F] font-bold text-[10px] tracking-widest-ui uppercase">SHOP NOW &gt;</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ Section 6: New Arrivals ═══ -->
+  <section class="py-24 text-center px-8">
+    <h2 class="text-[40px] font-bold mb-2">New Arrivals</h2>
+    <p class="text-[var(--color-outline)] text-base mb-16">The latest additions to our ever-evolving collection.</p>
+    <div class="max-w-[1280px] mx-auto grid grid-cols-4 gap-8">
+
+      <a href="#" class="flex flex-col text-left group">
+        <div class="relative bg-[var(--color-surface-container-lowest)] aspect-[4/5] mb-6 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
+          <img class="w-full h-full object-cover" alt="Smoked Glass Wine Set"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh5AO2pcomAfbmiQWvmF1DXpZb8x7ZBjZ2j47a9QjUFx-CaZfglnSQUabjTSss4oP2qn6JbQuSY754CiPLnlFNYGtPXfiWrxPGt4QOl2783m7eGSiVhv_JK9r-FBzyGUMik0lL0L3iYruSmS09ifXiTIdTxNgSXbx2z6VbWW8wRNpCbLXAKLSSOZCvf1IZWPMU47mpFOQSXqPPj0X3niH6iWUB06aFExJ3Z5wCuXYepdNo5jiDZ_NC4fR0nAzSQxVgVlUjaHA1aWmS" />
+          <span class="absolute top-4 left-4 bg-[#D5C68F] text-[#1F1B16] text-[10px] font-bold tracking-widest-ui px-3 py-1 uppercase rounded-sm">NEW</span>
+        </div>
+        <h5 class="text-base font-bold mb-1 group-hover:text-[#B45A3C] transition-colors">Smoked Glass Wine Set</h5>
+        <p class="text-sm font-semibold text-[#4A443D]">Rs. 3,499</p>
+      </a>
+
+      <a href="#" class="flex flex-col text-left group">
+        <div class="relative bg-[var(--color-surface-container-lowest)] aspect-[4/5] mb-6 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
+          <img class="w-full h-full object-cover" alt="Cotton Bath Towel"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoPFeJVIob-Hh-7rZ0K_j60S7Fq1YTZwKtQtzY0l5urp__6qPAXxFZX78otTrQY5VyA3M18w9B0H_9a4SwqUnOpuCxJJ28ZwOwIBkHmGZ4e4y3GJquSJGdla5elmxDBxMtwtx_r7H_1iYSn3EEBZ86hAdyT70GDZxhZTeuPsmYnOUvTkyopSoOkP47ZmHvzWpxKVDiLerQ_Sikhqae01AGRhEtPzJJC6sCmIPFC6tulGmaiqh_3aT323zVvce3kgY5c4uRJOm2VI5K" />
+        </div>
+        <h5 class="text-base font-bold mb-1 group-hover:text-[#B45A3C] transition-colors">Cotton Bath Towel</h5>
+        <p class="text-sm font-semibold text-[#4A443D]">Rs. 899</p>
+      </a>
+
+      <a href="#" class="flex flex-col text-left group">
+        <div class="relative bg-[var(--color-surface-container-lowest)] aspect-[4/5] mb-6 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
+          <img class="w-full h-full object-cover" alt="Artificial Peony Bouquet"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL9GzMCaANTLBcDQMWEBy_Yk3iY92MCRSD5hpHqJ0RCmgjruCL5bADfa1HcNQhVud3PDUFrrH3kJnPlQ-Y1la3Se73MkTSNRdsbzhCRFFE1JqFuPld3JiDrsTUymBMee-UPemSg_Bt1ia6fixNF_Pyxsk85FgUL6Cfd3zxXk_PDgoNOhlhikX1f9FzMiHmHmFrLvnCQ8COLh2lG2G5b_Hdpxv5Ylrelc-naW6RkoNqqfsTDgywKY0SlmI8n9fRFlbQcR9_R_DB7QOb" />
+          <span class="absolute top-4 left-4 bg-[#D5C68F] text-[#1F1B16] text-[10px] font-bold tracking-widest-ui px-3 py-1 uppercase rounded-sm">NEW</span>
+        </div>
+        <h5 class="text-base font-bold mb-1 group-hover:text-[#B45A3C] transition-colors">Artificial Peony Bouquet</h5>
+        <p class="text-sm font-semibold text-[#4A443D]">Rs. 1,299</p>
+      </a>
+
+      <a href="#" class="flex flex-col text-left group">
+        <div class="relative bg-[var(--color-surface-container-lowest)] aspect-[4/5] mb-6 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
+          <img class="w-full h-full object-cover" alt="Outdoor Pendant Lantern"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLwUXaSEmX0PomLBhK0r75vGqlPRZiRITx4ERRWOrvT5Q3BBT5Qma5elAMUbF3OXyjKZHKDhGvmY5kOdlUrqcjr1rQzV_bZv1b1LeQTBRpvwXNbks5ip7kGgrp29DOJjQsypwYzETtxn7wZ0jRj_TSeDnaeuJqAUPetccX6LKCesQsrPY82k-JNbQiwX7SgL9oOv4-lE6w_7c1_DSfokYnDpvjqU9GK2m-kxuOi_QZdf3vy6nixY0NVoAkpBwWqBILNVyW8i4xIfRG" />
+        </div>
+        <h5 class="text-base font-bold mb-1 group-hover:text-[#B45A3C] transition-colors">Outdoor Pendant Lantern</h5>
+        <p class="text-sm font-semibold text-[#4A443D]">Rs. 4,499</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ Section 7: Final Banner (50/50 image + copy) ═══ -->
+  <section class="max-w-[1280px] mx-auto h-[320px] mb-24 mt-12 flex flex-row overflow-hidden rounded-lg shadow-sm">
+    <div class="w-1/2 overflow-hidden h-full">
+      <img class="w-full h-full object-cover" alt="Terracotta planters"
+           src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkYIW7WnD35xo1SzVpNpF9klYWBBOi3OYjVfF3AKea1IhwRKTqqYzZMKIhwEqobeRb5Amsj3A3cwHcZIExhx5wedBn_tql3r72PoHjFYPtTdNABlgl_dnHFSu57YOmYKQI_Grh4GhIt_M_p6L-ZE4PMDO8e_3p9suLllqm9w4477QnK4FQpcx7Uer_QGCK5NP6VQUrkM7OYtV9MQ5TREDfL_s0b3lXHnc1kbP-nNSnAaNfSm9ddeoGbszhS4xRLUswFM3C-O5WF3q6" />
+    </div>
+    <div class="w-1/2 bg-[var(--color-surface-container)] flex flex-col justify-center px-20">
+      <span class="text-xs font-bold tracking-widest-ui text-[#D5C68F] uppercase mb-2">MONSOON READY</span>
+      <h2 class="text-3xl font-bold mb-4">Outdoor Planters from Rs. 1,499</h2>
+      <p class="text-[var(--color-outline)] mb-8 leading-relaxed max-w-sm">Prepare your sanctuary for the rains with our durable and artistic garden collections.</p>
+      <a href="#" class="w-fit bg-[#D5C68F] text-[#1F1B16] px-10 py-4 font-bold tracking-widest-ui uppercase text-sm rounded-[2px] hover:bg-[#caba80] transition-all">SHOP OUTDOOR</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESKTOP FOOTER  (mirrors src/components/Footer.tsx)
+     5-column grid: brand (×2) + Shop + Support + Newsletter
+     Background: #AB877B (dusty rose) · Text: #FAF6EE
+     ════════════════════════════════════════════════════════════════ -->
+<footer class="bg-[#AB877B] w-full px-12 py-16 grid grid-cols-5 gap-8">
+  <div class="col-span-2">
+    <span class="text-lg font-semibold text-[#FAF6EE] block mb-6 tracking-widest-ui">TREASURE TROVE</span>
+    <p class="text-[#FAF6EE]/80 text-sm max-w-sm mb-8 leading-relaxed">
+      Handpicking the finest modern heirlooms from artisans across India. Quality, heritage, and modern design in every piece.
+    </p>
+    <div class="flex gap-4">
+      <span class="material-symbols-outlined text-[#FAF6EE] cursor-pointer hover:text-[#D5C68F] transition-colors">social_leaderboard</span>
+      <span class="material-symbols-outlined text-[#FAF6EE] cursor-pointer hover:text-[#D5C68F] transition-colors">share</span>
+      <span class="material-symbols-outlined text-[#FAF6EE] cursor-pointer hover:text-[#D5C68F] transition-colors">public</span>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <h6 class="text-[#FAF6EE] font-bold text-xs tracking-widest-ui uppercase mb-2">SHOP</h6>
+    <a href="#" class="text-[#FAF6EE] text-xs font-medium tracking-widest-ui uppercase hover:text-[#D5C68F] transition-all">TRACK ORDER</a>
+    <a href="#" class="text-[#FAF6EE] text-xs font-medium tracking-widest-ui uppercase hover:text-[#D5C68F] transition-all">SHOP ALL</a>
+    <a href="#" class="text-[#FAF6EE] text-xs font-medium tracking-widest-ui uppercase hover:text-[#D5C68F] transition-all">ABOUT US</a>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <h6 class="text-[#FAF6EE] font-bold text-xs tracking-widest-ui uppercase mb-2">SUPPORT</h6>
+    <a href="#" class="text-[#FAF6EE] text-xs font-medium tracking-widest-ui uppercase hover:text-[#D5C68F] transition-all">CONTACT</a>
+    <a href="#" class="text-[#FAF6EE] text-xs font-medium tracking-widest-ui uppercase hover:text-[#D5C68F] transition-all">HELP</a>
+    <a href="#" class="text-[#FAF6EE] text-xs font-medium tracking-widest-ui uppercase hover:text-[#D5C68F] transition-all">POLICIES</a>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <h6 class="text-[#FAF6EE] font-bold text-xs tracking-widest-ui uppercase mb-2">NEWSLETTER</h6>
+    <p class="text-[#FAF6EE]/80 text-xs mb-4">Subscribe for early access and editorial edits.</p>
+    <div class="flex border-b border-[#FAF6EE]/30 pb-2">
+      <input
+        class="bg-transparent border-none text-xs text-white placeholder:text-[#FAF6EE]/50 w-full focus:ring-0 px-0 outline-none"
+        placeholder="EMAIL ADDRESS" type="email" />
+      <button class="text-[#FAF6EE] hover:text-[#D5C68F] transition-colors">
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </div>
+    <p class="mt-8 text-[10px] text-[#FAF6EE]/60 tracking-widest-ui uppercase">Copyright 2026 Treasure Trove. Made in India.</p>
+  </div>
+</footer>
+
+</body>
+</html>

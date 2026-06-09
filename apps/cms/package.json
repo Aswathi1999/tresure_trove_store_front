@@ -1,0 +1,43 @@
+{
+  "name": "cms",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start --port 3001",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next",
+    "generate:types": "payload generate:types",
+    "seed:offer-cards": "payload run src/scripts/seed-offer-cards.ts",
+    "seed:material-stories": "payload run src/scripts/seed-material-stories.ts",
+    "test": "jest --config jest.config.ts"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.28.1",
+    "@payloadcms/next": "^3.28.1",
+    "@payloadcms/richtext-lexical": "^3.28.1",
+    "@payloadcms/storage-s3": "^3.28.1",
+    "@payloadcms/ui": "^3.28.1",
+    "next": "15.4.11",
+    "payload": "^3.28.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sass": "^1.77.4",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.18.0",
+    "eslint-config-next": "15.4.11",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

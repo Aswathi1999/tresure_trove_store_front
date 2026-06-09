@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2021"],
+    "outDir": "dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "ignoreDeprecations": "5.0",
+    "paths": {
+      "@medusajs/framework/utils": ["./node_modules/@medusajs/framework/dist/utils"],
+      "@medusajs/framework/http": ["./node_modules/@medusajs/framework/dist/http"],
+      "@medusajs/framework/types": ["./node_modules/@medusajs/framework/dist/types"]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+    "noEmitOnError": false
+  },
+  "include": ["src", "medusa-config.ts"],
+  "exclude": ["node_modules", "dist", ".medusa"],
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    "compilerOptions": {
+      "module": "CommonJS",
+      "moduleResolution": "node"
+    }
+  }
+}

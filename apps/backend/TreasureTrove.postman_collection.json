@@ -1,0 +1,1624 @@
+{
+  "info": {
+    "name": "Treasure Trove — Backend API",
+    "description": "Complete API collection for the Treasure Trove luxury furniture platform.\n\n**Setup:**\n1. Set `baseUrl` to `http://localhost:9000` for local dev.\n2. Run **Auth → Admin Login** first — the `adminToken` variable is set automatically.\n3. Run **Auth → Customer Login** to set `customerToken`.\n4. Set `publishableKey` to the value from `NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY` in storefront `.env.local`.\n\n**Folders:**\n- 🔐 Auth\n- 🛍️ Store — Products / Collections / Cart / Checkout / Customers / Custom\n- 👑 Admin — Products / Inventory / Orders / Customers / Uploads / Promotions / Regions & Tax / Shipping / API Keys & Users / Custom\n- 🔔 Webhooks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "treasure-trove-api-collection"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:9000", "type": "string" },
+    { "key": "publishableKey", "value": "YOUR_PUBLISHABLE_KEY", "type": "string" },
+    { "key": "adminToken", "value": "", "type": "string" },
+    { "key": "customerToken", "value": "", "type": "string" },
+    { "key": "cartId", "value": "", "type": "string" },
+    { "key": "productId", "value": "", "type": "string" },
+    { "key": "variantId", "value": "", "type": "string" },
+    { "key": "orderId", "value": "", "type": "string" },
+    { "key": "customerId", "value": "", "type": "string" },
+    { "key": "collectionId", "value": "", "type": "string" },
+    { "key": "regionId", "value": "", "type": "string" },
+    { "key": "lineItemId", "value": "", "type": "string" },
+    { "key": "inventoryItemId", "value": "", "type": "string" },
+    { "key": "locationId", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Admin Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.token) { pm.collectionVariables.set('adminToken', json.token); }",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Token present', () => pm.expect(json.token).to.be.a('string'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@treasuretrove.in\",\n  \"password\": \"supersecret\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/admin/emailpass",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "admin", "emailpass"]
+            },
+            "description": "Authenticate as an admin user. Sets `adminToken` variable automatically."
+          }
+        },
+        {
+          "name": "Customer Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.token) { pm.collectionVariables.set('customerToken', json.token); }",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"customer@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/customer/emailpass",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "customer", "emailpass"]
+            },
+            "description": "Authenticate as a store customer. Sets `customerToken` variable automatically."
+          }
+        },
+        {
+          "name": "Customer Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/customer/emailpass/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "customer", "emailpass", "register"]
+            }
+          }
+        },
+        {
+          "name": "Logout (Delete Session)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customerToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/auth/session",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "session"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/auth/token/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "token", "refresh"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🛍️ Store — Products",
+      "item": [
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/products?limit=12&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "products"],
+              "query": [
+                { "key": "limit", "value": "12" },
+                { "key": "offset", "value": "0" },
+                { "key": "order", "value": "-created_at", "disabled": true },
+                { "key": "handle", "value": "okura-lounge-chair", "disabled": true },
+                { "key": "collection_id[]", "value": "{{collectionId}}", "disabled": true },
+                {
+                  "key": "fields",
+                  "value": "*variants,*variants.prices,*images,*collection,*options,*options.values,*tags",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "List all published store products. Supports filtering by collection_id, handle, order, limit, offset."
+          }
+        },
+        {
+          "name": "Get Product by Handle",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/products?handle=okura-lounge-chair&fields=*variants,*variants.prices,*images,*collection,*options,*options.values,*tags",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "products"],
+              "query": [
+                { "key": "handle", "value": "okura-lounge-chair" },
+                {
+                  "key": "fields",
+                  "value": "*variants,*variants.prices,*images,*collection,*options,*options.values,*tags"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/products/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "products", "{{productId}}"]
+            }
+          }
+        },
+        {
+          "name": "List Products — New Arrivals",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/products?limit=4&order=-created_at",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "products"],
+              "query": [
+                { "key": "limit", "value": "4" },
+                { "key": "order", "value": "-created_at" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/products?q=teak&limit=12",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "products"],
+              "query": [
+                { "key": "q", "value": "teak" },
+                { "key": "limit", "value": "12" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🛍️ Store — Collections",
+      "item": [
+        {
+          "name": "List Collections",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/collections",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "collections"]
+            }
+          }
+        },
+        {
+          "name": "Get Collection by Handle",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/collections?handle=living-room",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "collections"],
+              "query": [{ "key": "handle", "value": "living-room" }]
+            }
+          }
+        },
+        {
+          "name": "Get Collection Products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/products?collection_id[]=<collectionId>&limit=12&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "products"],
+              "query": [
+                { "key": "collection_id[]", "value": "<collectionId>" },
+                { "key": "limit", "value": "12" },
+                { "key": "offset", "value": "0" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🛍️ Store — Cart",
+      "item": [
+        {
+          "name": "Create Cart",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.cart?.id) { pm.collectionVariables.set('cartId', json.cart.id); }",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"region_id\": \"{{regionId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/carts",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts"]
+            },
+            "description": "Creates a new cart. Sets `cartId` variable automatically."
+          }
+        },
+        {
+          "name": "Get Cart",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/carts/{{cartId}}?fields=id,region_id,currency_code,subtotal,tax_total,total,*items,*items.variant,*items.variant.product",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts", "{{cartId}}"],
+              "query": [
+                {
+                  "key": "fields",
+                  "value": "id,region_id,currency_code,subtotal,tax_total,total,*items,*items.variant,*items.variant.product"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Item to Cart",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "const items = json.cart?.items;",
+                  "if (items?.length) { pm.collectionVariables.set('lineItemId', items[items.length-1].id); }",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"variant_id\": \"{{variantId}}\",\n  \"quantity\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/carts/{{cartId}}/line-items",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts", "{{cartId}}", "line-items"]
+            }
+          }
+        },
+        {
+          "name": "Update Cart Item Quantity",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/carts/{{cartId}}/line-items/{{lineItemId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts", "{{cartId}}", "line-items", "{{lineItemId}}"]
+            }
+          }
+        },
+        {
+          "name": "Remove Cart Item",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/carts/{{cartId}}/line-items/{{lineItemId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts", "{{cartId}}", "line-items", "{{lineItemId}}"]
+            }
+          }
+        },
+        {
+          "name": "Apply Promotion Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"promo_codes\": [\"WELCOME10\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/carts/{{cartId}}/promotions",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts", "{{cartId}}", "promotions"]
+            }
+          }
+        },
+        {
+          "name": "Remove Promotion Code",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/carts/{{cartId}}/promotions?promo_codes[]=WELCOME10",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts", "{{cartId}}", "promotions"],
+              "query": [{ "key": "promo_codes[]", "value": "WELCOME10" }]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🛍️ Store — Checkout",
+      "item": [
+        {
+          "name": "Update Cart Address & Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"customer@example.com\",\n  \"shipping_address\": {\n    \"first_name\": \"Riya\",\n    \"last_name\": \"Sharma\",\n    \"address_1\": \"42 Bandra West\",\n    \"address_2\": \"\",\n    \"city\": \"Mumbai\",\n    \"country_code\": \"in\",\n    \"province\": \"Maharashtra\",\n    \"postal_code\": \"400050\",\n    \"phone\": \"+919876543210\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/carts/{{cartId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts", "{{cartId}}"]
+            }
+          }
+        },
+        {
+          "name": "List Shipping Options",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/shipping-options?cart_id={{cartId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "shipping-options"],
+              "query": [{ "key": "cart_id", "value": "{{cartId}}" }]
+            }
+          }
+        },
+        {
+          "name": "Add Shipping Method",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"option_id\": \"<shipping_option_id>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/carts/{{cartId}}/shipping-methods",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts", "{{cartId}}", "shipping-methods"]
+            }
+          }
+        },
+        {
+          "name": "Initiate Payment Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider_id\": \"pp_razorpay_razorpay\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/payment-collections/{{cartId}}/payment-sessions",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "payment-collections", "{{cartId}}", "payment-sessions"]
+            },
+            "description": "provider_id options: `pp_razorpay_razorpay` (INR) | `pp_stripe_stripe` (USD/AED)"
+          }
+        },
+        {
+          "name": "Complete Cart (Place Order)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.order?.id) { pm.collectionVariables.set('orderId', json.order.id); }",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/carts/{{cartId}}/complete",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "carts", "{{cartId}}", "complete"]
+            }
+          }
+        },
+        {
+          "name": "List Regions",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-publishable-api-key", "value": "{{publishableKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/regions",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "regions"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🛍️ Store — Customers",
+      "item": [
+        {
+          "name": "Get My Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{customerToken}}" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/store/customers/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "customers", "me"]
+            }
+          }
+        },
+        {
+          "name": "Update My Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{customerToken}}" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Riya\",\n  \"last_name\": \"Sharma\",\n  \"phone\": \"+919876543210\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/customers/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "customers", "me"]
+            }
+          }
+        },
+        {
+          "name": "List My Addresses",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{customerToken}}" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/store/customers/me/addresses",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "customers", "me", "addresses"]
+            }
+          }
+        },
+        {
+          "name": "Add Address",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{customerToken}}" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Riya\",\n  \"last_name\": \"Sharma\",\n  \"address_1\": \"42 Bandra West\",\n  \"city\": \"Mumbai\",\n  \"country_code\": \"in\",\n  \"province\": \"Maharashtra\",\n  \"postal_code\": \"400050\",\n  \"phone\": \"+919876543210\",\n  \"is_default_shipping\": true,\n  \"is_default_billing\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/customers/me/addresses",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "customers", "me", "addresses"]
+            }
+          }
+        },
+        {
+          "name": "Get My Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{customerToken}}" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/store/customers/me/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "customers", "me", "orders"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🛍️ Store — Custom Routes",
+      "item": [
+        {
+          "name": "Submit Contact Form",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Arjun Mehta\",\n  \"email\": \"arjun@example.com\",\n  \"message\": \"I am interested in a custom furniture piece for my living room. Can you help?\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/contact",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "contact"]
+            },
+            "description": "Custom route. Validates: name (required), email (valid format), message (min 20 chars). HTML tags are stripped. No auth required."
+          }
+        },
+        {
+          "name": "Submit Contact Form — Validation Error",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-publishable-api-key", "value": "{{publishableKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"email\": \"not-an-email\",\n  \"message\": \"short\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/store/contact",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "contact"]
+            },
+            "description": "Expects 400 with VALIDATION_ERROR and per-field details."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Products",
+      "item": [
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/products?limit=20&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "products"],
+              "query": [
+                { "key": "limit", "value": "20" },
+                { "key": "offset", "value": "0" },
+                { "key": "status[]", "value": "published", "disabled": true },
+                { "key": "status[]", "value": "draft", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Product",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/products/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "products", "{{productId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.product?.id) {",
+                  "  pm.collectionVariables.set('productId', json.product.id);",
+                  "  const v = json.product.variants?.[0];",
+                  "  if (v) pm.collectionVariables.set('variantId', v.id);",
+                  "}",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Aranya Side Table\",\n  \"handle\": \"aranya-side-table\",\n  \"description\": \"Hand-carved mango wood side table with brass inlay. Each piece is unique.\",\n  \"status\": \"published\",\n  \"options\": [\n    { \"title\": \"Material\", \"values\": [\"Mango\"] },\n    { \"title\": \"Finish\",   \"values\": [\"Natural\", \"Dark\"] }\n  ],\n  \"variants\": [\n    {\n      \"title\": \"Mango / Natural\",\n      \"sku\": \"ARN-MANGO-NAT\",\n      \"manage_inventory\": true,\n      \"options\": { \"Material\": \"Mango\", \"Finish\": \"Natural\" },\n      \"prices\": [\n        { \"amount\": 2200000, \"currency_code\": \"inr\" },\n        { \"amount\": 26500,   \"currency_code\": \"usd\" }\n      ]\n    },\n    {\n      \"title\": \"Mango / Dark\",\n      \"sku\": \"ARN-MANGO-DARK\",\n      \"manage_inventory\": true,\n      \"options\": { \"Material\": \"Mango\", \"Finish\": \"Dark\" },\n      \"prices\": [\n        { \"amount\": 2350000, \"currency_code\": \"inr\" },\n        { \"amount\": 28200,   \"currency_code\": \"usd\" }\n      ]\n    }\n  ],\n  \"metadata\": {\n    \"wood_type\": \"mango\",\n    \"dimensions\": \"45x45x55 cm\",\n    \"warranty\": \"5 years structural\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "products"]
+            },
+            "description": "Prices are in smallest currency unit: paise for INR (1 INR = 100 paise), cents for USD. Sets `productId` and `variantId` automatically."
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Aranya Side Table — Updated\",\n  \"status\": \"published\",\n  \"metadata\": {\n    \"wood_type\": \"mango\",\n    \"rating\": 4.8,\n    \"reviewCount\": 12,\n    \"dimensions\": \"45x45x55 cm\",\n    \"warranty\": \"5 years structural\",\n    \"specifications\": [\n      { \"label\": \"Material\", \"value\": \"Solid Mango Wood\" },\n      { \"label\": \"Finish\",   \"value\": \"Hand-rubbed Oil\" },\n      { \"label\": \"Weight\",   \"value\": \"8 kg\" }\n    ],\n    \"careInstructions\": [\n      \"Wipe with a dry cloth. Avoid harsh chemicals.\",\n      \"Oil every 6 months with food-grade mineral oil.\"\n    ]\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/products/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "products", "{{productId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/products/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "products", "{{productId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Product Variant",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prices\": [\n    { \"amount\": 2300000, \"currency_code\": \"inr\" },\n    { \"amount\": 27500,   \"currency_code\": \"usd\" }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/products/{{productId}}/variants/{{variantId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "products", "{{productId}}", "variants", "{{variantId}}"]
+            }
+          }
+        },
+        {
+          "name": "Bulk CSV Import",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/products.csv",
+                  "description": "CSV with columns: title, handle, description, variant_sku, price_inr, price_usd, stock, material, size, finish, wood_type, dimensions, warranty"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/products/import",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "products", "import"]
+            },
+            "description": "Custom route. Upload a CSV file (max 5 MB) with product data. Required columns:\ntitle, handle, description, variant_sku, price_inr, price_usd, stock, material, size, finish, wood_type, dimensions, warranty\n\nReturns: { summary: { total_rows, created, updated, skipped, failed }, details }"
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Inventory",
+      "item": [
+        {
+          "name": "List Inventory Items",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/inventory-items?limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "inventory-items"],
+              "query": [{ "key": "limit", "value": "20" }]
+            }
+          }
+        },
+        {
+          "name": "Get Inventory Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/inventory-items/{{inventoryItemId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "inventory-items", "{{inventoryItemId}}"]
+            }
+          }
+        },
+        {
+          "name": "List Stock Locations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/stock-locations",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "stock-locations"]
+            }
+          }
+        },
+        {
+          "name": "Create Stock Location",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.stock_location?.id) { pm.collectionVariables.set('locationId', json.stock_location.id); }",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Main Warehouse\",\n  \"address\": {\n    \"address_1\": \"Plot 7, MIDC Industrial Area\",\n    \"city\": \"Pune\",\n    \"country_code\": \"in\",\n    \"province\": \"Maharashtra\",\n    \"postal_code\": \"411018\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/stock-locations",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "stock-locations"]
+            },
+            "description": "Must create a stock location before setting inventory quantities on variants. Sets `locationId` variable."
+          }
+        },
+        {
+          "name": "Set Inventory Level (Stocked Quantity)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location_id\": \"{{locationId}}\",\n  \"stocked_quantity\": 25\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/inventory-items/{{inventoryItemId}}/location-levels",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "inventory-items", "{{inventoryItemId}}", "location-levels"]
+            },
+            "description": "Sets the stocked quantity for a specific inventory item at a specific stock location. This is what makes a product variant purchasable."
+          }
+        },
+        {
+          "name": "Update Inventory Level",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stocked_quantity\": 50\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/inventory-items/{{inventoryItemId}}/location-levels/{{locationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "admin",
+                "inventory-items",
+                "{{inventoryItemId}}",
+                "location-levels",
+                "{{locationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Inventory Levels for Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/inventory-items/{{inventoryItemId}}/location-levels",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "inventory-items", "{{inventoryItemId}}", "location-levels"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Uploads",
+      "item": [
+        {
+          "name": "Upload Product Image",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "files",
+                  "type": "file",
+                  "src": "/path/to/product-image.jpg",
+                  "description": "Supported: JPEG, PNG, WEBP. Max size ~50 MB."
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/uploads",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "uploads"]
+            },
+            "description": "Step 1 of product image upload.\n\nField name must be `files` (not `file`).\nReturns: { files: [{ id, url }] }\n\nThe returned `url` is then passed to Create/Update Product in the `images` or `thumbnail` field.\n\nIn dev (no AWS credentials): URL = http://localhost:9000/uploads/filename.jpg\nIn prod (with AWS): URL = https://cdn.treasuretrove.in/products/filename.jpg"
+          }
+        },
+        {
+          "name": "Upload Multiple Images",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "files", "type": "file", "src": "/path/to/image-1.jpg" },
+                { "key": "files", "type": "file", "src": "/path/to/image-2.jpg" }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/uploads",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "uploads"]
+            }
+          }
+        },
+        {
+          "name": "Attach Image to Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"thumbnail\": \"http://localhost:9000/uploads/your-image.jpg\",\n  \"images\": [\n    { \"url\": \"http://localhost:9000/uploads/your-image.jpg\" },\n    { \"url\": \"http://localhost:9000/uploads/your-image-2.jpg\" }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/products/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "products", "{{productId}}"]
+            },
+            "description": "Step 2 after uploading. Use the URL returned from POST /admin/uploads. `thumbnail` = card/listing image. `images` = full gallery shown on the product detail page."
+          }
+        },
+        {
+          "name": "Delete Uploaded File",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/uploads/<file_id>",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "uploads", "<file_id>"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Orders",
+      "item": [
+        {
+          "name": "List Orders",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/orders?limit=20&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "orders"],
+              "query": [
+                { "key": "limit", "value": "20" },
+                { "key": "offset", "value": "0" },
+                { "key": "status[]", "value": "pending", "disabled": true },
+                { "key": "status[]", "value": "completed", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Order",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/orders/{{orderId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "orders", "{{orderId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Fulfillment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location_id\": \"{{locationId}}\",\n  \"items\": [\n    { \"id\": \"<order_item_id>\", \"quantity\": 1 }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/orders/{{orderId}}/fulfillments",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "orders", "{{orderId}}", "fulfillments"]
+            }
+          }
+        },
+        {
+          "name": "Create Shipment (Mark Shipped)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fulfillment_id\": \"<fulfillment_id>\",\n  \"labels\": [\n    { \"tracking_number\": \"TT1234567890IN\", \"tracking_url\": \"https://track.dtdc.com/TT1234567890IN\", \"label_url\": \"\" }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/orders/{{orderId}}/shipment",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "orders", "{{orderId}}", "shipment"]
+            }
+          }
+        },
+        {
+          "name": "Create Return",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"{{orderId}}\",\n  \"items\": [\n    { \"id\": \"<order_item_id>\", \"quantity\": 1, \"reason_id\": null }\n  ],\n  \"refund_amount\": 2200000\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/returns",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "returns"]
+            }
+          }
+        },
+        {
+          "name": "Issue Refund",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 2200000,\n  \"note\": \"Customer return approved\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/orders/{{orderId}}/refund",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "orders", "{{orderId}}", "refund"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Customers",
+      "item": [
+        {
+          "name": "List Customers",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/customers?limit=20&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "customers"],
+              "query": [
+                { "key": "limit", "value": "20" },
+                { "key": "offset", "value": "0" },
+                { "key": "q", "value": "riya", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Customer",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/customers/{{customerId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "customers", "{{customerId}}"]
+            }
+          }
+        },
+        {
+          "name": "Deactivate Customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/customers/{{customerId}}/deactivate",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "customers", "{{customerId}}", "deactivate"]
+            },
+            "description": "Custom route. Sets `metadata.deactivated = true` on the customer. Returns the updated customer object."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Collections",
+      "item": [
+        {
+          "name": "List Collections",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/collections",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "collections"]
+            }
+          }
+        },
+        {
+          "name": "Create Collection",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.collection?.id) { pm.collectionVariables.set('collectionId', json.collection.id); }",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Bedroom\",\n  \"handle\": \"bedroom\",\n  \"metadata\": {\n    \"description\": \"Luxury bedroom furniture crafted for rest and refinement.\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/collections",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "collections"]
+            }
+          }
+        },
+        {
+          "name": "Add Products to Collection",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_ids\": [\"{{productId}}\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/collections/{{collectionId}}/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "collections", "{{collectionId}}", "products"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Promotions",
+      "item": [
+        {
+          "name": "List Promotions",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/promotions?limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "promotions"],
+              "query": [{ "key": "limit", "value": "20" }]
+            }
+          }
+        },
+        {
+          "name": "Create Percentage Discount",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"WELCOME10\",\n  \"type\": \"standard\",\n  \"application_method\": {\n    \"type\": \"percentage\",\n    \"target_type\": \"order\",\n    \"value\": 10\n  },\n  \"rules\": [],\n  \"is_automatic\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/promotions",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "promotions"]
+            },
+            "description": "10% off entire order. Customers apply with code WELCOME10."
+          }
+        },
+        {
+          "name": "Create Fixed Amount Discount",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"FLAT500\",\n  \"type\": \"standard\",\n  \"application_method\": {\n    \"type\": \"fixed\",\n    \"target_type\": \"order\",\n    \"value\": 50000,\n    \"currency_code\": \"inr\"\n  },\n  \"rules\": [],\n  \"is_automatic\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/promotions",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "promotions"]
+            },
+            "description": "₹500 flat off (value in paise: 50000 paise = ₹500)."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Regions & Tax",
+      "item": [
+        {
+          "name": "List Regions",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/regions",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "regions"]
+            }
+          }
+        },
+        {
+          "name": "Create Region",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.region?.id) { pm.collectionVariables.set('regionId', json.region.id); }",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"India\",\n  \"currency_code\": \"inr\",\n  \"countries\": [\"in\"],\n  \"automatic_taxes\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/regions",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "regions"]
+            }
+          }
+        },
+        {
+          "name": "List Tax Rates",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/tax-rates",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "tax-rates"]
+            }
+          }
+        },
+        {
+          "name": "Create Tax Rate",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"GST 18%\",\n  \"rate\": 18,\n  \"code\": \"GST18\",\n  \"tax_region_id\": \"<tax_region_id>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/tax-rates",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "tax-rates"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Shipping",
+      "item": [
+        {
+          "name": "List Shipping Options",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/shipping-options",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "shipping-options"]
+            }
+          }
+        },
+        {
+          "name": "Create Shipping Option",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Standard Delivery\",\n  \"service_zone_id\": \"<service_zone_id>\",\n  \"shipping_profile_id\": \"<shipping_profile_id>\",\n  \"provider_id\": \"manual_manual\",\n  \"type\": {\n    \"label\": \"Standard\",\n    \"description\": \"5-7 business days\",\n    \"code\": \"standard\"\n  },\n  \"price_type\": \"flat\",\n  \"prices\": [\n    { \"currency_code\": \"inr\", \"amount\": 49900 },\n    { \"currency_code\": \"usd\", \"amount\": 599 }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/shipping-options",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "shipping-options"]
+            },
+            "description": "Flat rate shipping. Amounts in smallest currency unit (paise for INR, cents for USD). 49900 paise = ₹499."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — API Keys & Users",
+      "item": [
+        {
+          "name": "List API Keys",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/api-keys",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "api-keys"]
+            }
+          }
+        },
+        {
+          "name": "Create Publishable API Key",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Storefront Key\",\n  \"type\": \"publishable\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/api-keys",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "api-keys"]
+            },
+            "description": "The returned `token` goes into NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY in the storefront .env.local."
+          }
+        },
+        {
+          "name": "List Admin Users",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users"]
+            }
+          }
+        },
+        {
+          "name": "Create Admin User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"manager@treasuretrove.in\",\n  \"first_name\": \"Store\",\n  \"last_name\": \"Manager\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👑 Admin — Custom Routes",
+      "item": [
+        {
+          "name": "MeiliSearch — Full Sync",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/meilisearch/sync",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "meilisearch", "sync"]
+            },
+            "description": "Custom route. Syncs ALL products to MeiliSearch in batches of 50. Run once after enabling MeiliSearch or after bulk imports.\n\nReturns: { success, synced, deleted }\n\nRequires MEILISEARCH_HOST to be set in backend .env."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🔔 Webhooks",
+      "item": [
+        {
+          "name": "Razorpay — payment.captured",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-razorpay-signature", "value": "<hmac_sha256_signature>" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"payment.captured\",\n  \"payload\": {\n    \"payment\": {\n      \"entity\": {\n        \"id\": \"pay_ABC123\",\n        \"amount\": 2200000,\n        \"currency\": \"INR\",\n        \"status\": \"captured\",\n        \"order_id\": \"order_XYZ789\"\n      }\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/razorpay",
+              "host": ["{{baseUrl}}"],
+              "path": ["webhooks", "razorpay"]
+            },
+            "description": "No auth required (AUTHENTICATE = false). Signature is verified via HMAC-SHA256 using RAZORPAY_WEBHOOK_SECRET. The raw body must not be modified. Other events: `payment.failed`."
+          }
+        },
+        {
+          "name": "Razorpay — payment.failed",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-razorpay-signature", "value": "<hmac_sha256_signature>" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"payment.failed\",\n  \"payload\": {\n    \"payment\": {\n      \"entity\": {\n        \"id\": \"pay_FAIL001\",\n        \"amount\": 2200000,\n        \"currency\": \"INR\",\n        \"status\": \"failed\",\n        \"error_description\": \"Insufficient funds in customer account\"\n      }\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/razorpay",
+              "host": ["{{baseUrl}}"],
+              "path": ["webhooks", "razorpay"]
+            }
+          }
+        },
+        {
+          "name": "Stripe — payment_intent.succeeded",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "stripe-signature", "value": "t=<timestamp>,v1=<hmac_sha256>" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"payment_intent.succeeded\",\n  \"data\": {\n    \"object\": {\n      \"id\": \"pi_STRIPE001\",\n      \"amount\": 26500,\n      \"currency\": \"usd\",\n      \"status\": \"succeeded\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/stripe",
+              "host": ["{{baseUrl}}"],
+              "path": ["webhooks", "stripe"]
+            },
+            "description": "No auth required (AUTHENTICATE = false). Signature header format: `t=<unix_timestamp>,v1=<hmac_sha256>`. Other events: `payment_intent.payment_failed`, `charge.refunded`, `payment_intent.canceled`."
+          }
+        },
+        {
+          "name": "Stripe — charge.refunded",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "stripe-signature", "value": "t=<timestamp>,v1=<hmac_sha256>" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"charge.refunded\",\n  \"data\": {\n    \"object\": {\n      \"id\": \"ch_STRIPE001\",\n      \"amount_refunded\": 26500,\n      \"currency\": \"usd\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/stripe",
+              "host": ["{{baseUrl}}"],
+              "path": ["webhooks", "stripe"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

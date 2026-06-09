@@ -1,0 +1,42 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+.next
+dist
+build
+.turbo
+out
+
+# Environment variables — ignore every .env* variant; keep .env.example committed.
+.env*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Medusa
+uploads/
+.medusa/
+
+# Payload
+.payload/
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+.cache

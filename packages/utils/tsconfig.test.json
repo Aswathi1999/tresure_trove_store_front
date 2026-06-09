@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node16",
+    "isolatedModules": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  }
+}

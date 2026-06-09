@@ -1,0 +1,830 @@
+{
+  "project": "Treasure Trove Furniture Store",
+  "version": "1.0.0",
+  "stack": "Next.js 15 + Medusa v2 + Payload CMS + PostgreSQL + AWS S3",
+  "apps": ["Storefront", "Medusa Admin", "Payload CMS Admin"],
+  "modules": [
+    {
+      "id": "store-auth",
+      "name": "Storefront — Authentication",
+      "icon": "🔐",
+      "app": "Storefront",
+      "techStack": "Next.js + Medusa Auth API + JWT + Cookie Session",
+      "description": "Customer registration, login, logout and session management",
+      "screens": 9,
+      "flows": 1,
+      "missing": 1,
+      "edgeCases": 4,
+      "subFeatures": [
+        "Email & Password Registration",
+        "Returning Customer Login",
+        "JWT Session Management",
+        "Logout & Session Clear"
+      ]
+
+      
+    },
+    {
+      "id": "store-home",
+      "name": "Storefront — Homepage",
+      "icon": "🏠",
+      "app": "Storefront",
+      "techStack": "Next.js SSR + Medusa SDK + Payload REST + Framer Motion",
+      "description": "Hero section, marquee bar, collections grid, featured products, blog preview, philosophy section",
+      "screens": 5,
+      "flows": 1,
+      "missing": 1,
+      "edgeCases": 2,
+      "subFeatures": [
+        "Hero Section (Payload CMS)",
+        "Marquee Announcement Bar",
+        "Collections Grid",
+        "Featured Products (Medusa)",
+        "Blog Preview (Payload CMS)",
+        "Brand Philosophy Section"
+      ]
+    },
+    {
+      "id": "store-products",
+      "name": "Storefront — Products Listing",
+      "icon": "🛋️",
+      "app": "Storefront",
+      "techStack": "Next.js ISR + Medusa SDK + Tailwind",
+      "description": "Product grid with filters, sort, pagination and search results",
+      "screens": 7,
+      "flows": 1,
+      "missing": 1,
+      "edgeCases": 3,
+      "subFeatures": [
+        "Product Grid (4-col desktop)",
+        "Filter Sidebar (material, collection, price)",
+        "Sort Options",
+        "Infinite Scroll / Pagination",
+        "Product Card Component"
+      ]
+    },
+    {
+      "id": "store-pdp",
+      "name": "Storefront — Product Detail Page",
+      "icon": "🔎",
+      "app": "Storefront",
+      "techStack": "Next.js ISR + Medusa SDK + Payload REST + Next/Image + CloudFront",
+      "description": "Full product detail — image gallery, variant selector, pricing, stock, add to cart, related products",
+      "screens": 8,
+      "flows": 1,
+      "missing": 1,
+      "edgeCases": 3,
+      "subFeatures": [
+        "Multi-image Gallery with Zoom",
+        "Variant Selector (material, size, finish)",
+        "Real-time Price Update",
+        "Stock Availability Indicator",
+        "Add to Cart",
+        "Material Story Link (Payload)",
+        "Related Products Carousel",
+        "JSON-LD Structured Data"
+      ]
+    },
+    {
+      "id": "store-cart",
+      "name": "Storefront — Cart",
+      "icon": "🛒",
+      "app": "Storefront",
+      "techStack": "Next.js CSR + Medusa Cart API + React Context",
+      "description": "Slide-in cart drawer with item management, quantities and cart totals",
+      "screens": 6,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 3,
+      "subFeatures": [
+        "Slide-in Cart Drawer",
+        "Add / Remove Items",
+        "Quantity Update",
+        "Cart Total & Subtotal",
+        "Proceed to Checkout CTA"
+      ]
+    },
+    {
+      "id": "store-checkout",
+      "name": "Storefront — Checkout",
+      "icon": "💳",
+      "app": "Storefront",
+      "techStack": "Next.js CSR + Medusa Checkout API + Razorpay + Stripe",
+      "description": "Multi-step checkout — address, shipping selection, payment and order confirmation",
+      "screens": 10,
+      "flows": 1,
+      "missing": 1,
+      "edgeCases": 4,
+      "subFeatures": [
+        "Step 1 — Delivery Address Form",
+        "Step 2 — Shipping Method Selection",
+        "Step 3 — Payment (Razorpay INR / Stripe Intl)",
+        "Step 4 — Order Confirmation",
+        "Email Confirmation Trigger"
+      ]
+    },
+    {
+      "id": "store-account",
+      "name": "Storefront — Customer Account",
+      "icon": "👤",
+      "app": "Storefront",
+      "techStack": "Next.js CSR + Medusa Customer API + JWT",
+      "description": "Customer dashboard — order history, saved addresses, wishlist, profile settings",
+      "screens": 10,
+      "flows": 1,
+      "missing": 1,
+      "edgeCases": 3,
+      "subFeatures": [
+        "Account Dashboard",
+        "Order History",
+        "Order Detail & Status",
+        "Address Book Management",
+        "Wishlist",
+        "Profile Settings"
+      ]
+    },
+    {
+      "id": "store-search",
+      "name": "Storefront — Search",
+      "icon": "🔍",
+      "app": "Storefront",
+      "techStack": "Next.js CSR + Medusa Search API",
+      "description": "Live product search with results page, autocomplete suggestions",
+      "screens": 5,
+      "flows": 1,
+      "missing": 1,
+      "edgeCases": 2,
+      "subFeatures": [
+        "Search Bar (global, in Navbar)",
+        "Autocomplete Suggestions",
+        "Search Results Page",
+        "No Results State"
+      ]
+    },
+    {
+      "id": "store-collections",
+      "name": "Storefront — Collections",
+      "icon": "🗂️",
+      "app": "Storefront",
+      "techStack": "Next.js ISR + Medusa Collections API",
+      "description": "Collection landing pages — Living Room, Dining, Bedroom, Home Office, Outdoor",
+      "screens": 5,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 2,
+      "subFeatures": [
+        "Collection Hero",
+        "Collection Product Grid",
+        "Filter within Collection",
+        "Breadcrumb Navigation"
+      ]
+    },
+    {
+      "id": "store-journal",
+      "name": "Storefront — Journal (Blog)",
+      "icon": "📖",
+      "app": "Storefront",
+      "techStack": "Next.js ISR + Payload REST API + Portable Text Renderer",
+      "description": "Blog listing and full post pages powered by Payload CMS",
+      "screens": 6,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 2,
+      "subFeatures": [
+        "Blog Listing Page",
+        "Blog Post Detail (Portable Text)",
+        "Cover Image (CloudFront CDN)",
+        "Author & Date Display",
+        "Related Posts"
+      ]
+    },
+    {
+      "id": "store-materials",
+      "name": "Storefront — Materials Showcase",
+      "icon": "🌳",
+      "app": "Storefront",
+      "techStack": "Next.js ISR + Payload REST API + CloudFront",
+      "description": "Material story pages — Teak, Walnut, Oak, Mango, Rosewood",
+      "screens": 5,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 1,
+      "subFeatures": [
+        "Materials Listing Page",
+        "Individual Material Story Page",
+        "Sustainability Rating Display",
+        "Origin & Description (Payload CMS)",
+        "Link to Products Using This Material"
+      ]
+    },
+    {
+      "id": "store-static",
+      "name": "Storefront — Static Pages",
+      "icon": "📄",
+      "app": "Storefront",
+      "techStack": "Next.js Static + Tailwind",
+      "description": "About, craftsmanship, and contact pages",
+      "screens": 4,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 0,
+      "subFeatures": [
+        "About / Our Story Page",
+        "Craftsmanship Process Page",
+        "Contact Page",
+        "404 Not Found Page"
+      ]
+    },
+    {
+      "id": "med-products",
+      "name": "Medusa Admin — Products",
+      "icon": "🛋️",
+      "app": "Medusa Admin",
+      "techStack": "Medusa Admin UI + Node.js + PostgreSQL + S3",
+      "description": "Full product and variant management — create, edit, organise, publish",
+      "screens": 10,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 2,
+      "subFeatures": [
+        "Products Table & Search",
+        "Create Product (title, handle, description)",
+        "Manage Variants (SKU, price, stock)",
+        "Product Options (material, size, finish)",
+        "Product Images Upload",
+        "Collections & Categories Assignment",
+        "Metadata (wood type, dimensions, warranty)",
+        "Bulk CSV Import",
+        "Publish / Draft / Archive"
+      ]
+    },
+    {
+      "id": "med-orders",
+      "name": "Medusa Admin — Orders",
+      "icon": "📦",
+      "app": "Medusa Admin",
+      "techStack": "Medusa Admin UI + Node.js + PostgreSQL + WebSocket",
+      "description": "Order lifecycle management — view, fulfil, return, refund",
+      "screens": 9,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 3,
+      "subFeatures": [
+        "Orders Table (filter by status)",
+        "Order Detail View",
+        "Fulfillment Workflow (packed, shipped, delivered)",
+        "Returns & Exchanges",
+        "Refund Processing",
+        "Draft Manual Orders",
+        "Order Notes & Timeline"
+      ]
+    },
+    {
+      "id": "med-inventory",
+      "name": "Medusa Admin — Inventory",
+      "icon": "📊",
+      "app": "Medusa Admin",
+      "techStack": "Medusa Admin UI + Node.js + PostgreSQL",
+      "description": "Stock level management per variant across locations",
+      "screens": 6,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 2,
+      "subFeatures": [
+        "Inventory Table",
+        "Stock Level per Variant",
+        "Low Stock Alerts",
+        "Manual Stock Adjustment",
+        "Multi-location Inventory"
+      ]
+    },
+    {
+      "id": "med-customers",
+      "name": "Medusa Admin — Customers",
+      "icon": "👥",
+      "app": "Medusa Admin",
+      "techStack": "Medusa Admin UI + Node.js + PostgreSQL",
+      "description": "Customer profiles, order history, customer groups for trade pricing",
+      "screens": 7,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 1,
+      "subFeatures": [
+        "Customers Table",
+        "Customer Profile View",
+        "Customer Order History",
+        "Customer Groups (trade pricing)",
+        "Deactivate Account"
+      ]
+    },
+    {
+      "id": "med-discounts",
+      "name": "Medusa Admin — Discounts & Gift Cards",
+      "icon": "🎁",
+      "app": "Medusa Admin",
+      "techStack": "Medusa Admin UI + Node.js + PostgreSQL",
+      "description": "Promo codes, percentage and fixed discounts, gift card management",
+      "screens": 7,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 2,
+      "subFeatures": [
+        "Discount Codes CRUD",
+        "Percentage & Fixed Amount Discounts",
+        "Usage Limit & Expiry Config",
+        "Gift Cards",
+        "Discount Reports"
+      ]
+    },
+    {
+      "id": "med-settings",
+      "name": "Medusa Admin — Regions & Settings",
+      "icon": "⚙️",
+      "app": "Medusa Admin",
+      "techStack": "Medusa Admin UI + Node.js + PostgreSQL",
+      "description": "Regions, currencies, shipping zones, tax rules, payment providers, API keys",
+      "screens": 8,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 1,
+      "subFeatures": [
+        "Regions (India, UAE, SEA)",
+        "Multi-currency (INR, USD, AED)",
+        "Shipping Zones & Rates",
+        "Tax Configuration per Region",
+        "Payment Providers (Razorpay, Stripe)",
+        "Publishable API Keys",
+        "Team Members & Roles"
+      ]
+    },
+    {
+      "id": "cms-blog",
+      "name": "Payload CMS — Blog Posts",
+      "icon": "📝",
+      "app": "Payload CMS Admin",
+      "techStack": "Payload CMS v3 + Lexical Rich Text + PostgreSQL + S3",
+      "description": "Create, edit and publish blog posts with rich text editor and image management",
+      "screens": 8,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 2,
+      "subFeatures": [
+        "Blog Posts Table",
+        "Create / Edit Post",
+        "Lexical Rich Text Editor",
+        "Cover Image Upload (S3)",
+        "Slug Auto-generation",
+        "Draft / Published Workflow",
+        "ISR Revalidation Webhook on Publish"
+      ]
+    },
+    {
+      "id": "cms-materials",
+      "name": "Payload CMS — Material Stories",
+      "icon": "🌳",
+      "app": "Payload CMS Admin",
+      "techStack": "Payload CMS v3 + PostgreSQL + S3",
+      "description": "Create and manage material story documents for each wood type",
+      "screens": 6,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 1,
+      "subFeatures": [
+        "Material Stories Table",
+        "Create / Edit Material Story",
+        "Wood Type Selector",
+        "Sustainability Rating",
+        "Featured Image Upload (S3)",
+        "Rich Text Description"
+      ]
+    },
+    {
+      "id": "cms-homepage",
+      "name": "Payload CMS — Homepage Content",
+      "icon": "🏠",
+      "app": "Payload CMS Admin",
+      "techStack": "Payload CMS v3 + PostgreSQL",
+      "description": "Singleton document for managing homepage hero, marquee text and featured section",
+      "screens": 4,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 1,
+      "subFeatures": [
+        "Hero Headline & Subtext",
+        "Marquee Items (array)",
+        "Featured Collection Title & Handle",
+        "Live Preview"
+      ]
+    },
+    {
+      "id": "cms-media",
+      "name": "Payload CMS — Media Library",
+      "icon": "🖼️",
+      "app": "Payload CMS Admin",
+      "techStack": "Payload CMS v3 + AWS S3 + CloudFront + @payloadcms/plugin-cloud-storage",
+      "description": "Central image and file library — all uploads go to S3, served via CloudFront CDN",
+      "screens": 5,
+      "flows": 1,
+      "missing": 0,
+      "edgeCases": 3,
+      "subFeatures": [
+        "Media Library Grid",
+        "Upload Image / File",
+        "Auto-upload to AWS S3",
+        "CloudFront URL Generation",
+        "Alt Text Management",
+        "File Format & Size Validation"
+      ]
+    }
+  ],
+  "connections": [
+    { "from": "store-auth",        "to": "store-home",        "label": "Login success → homepage" },
+    { "from": "store-auth",        "to": "store-account",     "label": "Login success → account" },
+    { "from": "store-home",        "to": "store-products",    "label": "View all products" },
+    { "from": "store-home",        "to": "store-collections",  "label": "Browse collection" },
+    { "from": "store-home",        "to": "store-journal",     "label": "Read blog post" },
+    { "from": "store-home",        "to": "store-materials",   "label": "Explore materials" },
+    { "from": "store-home",        "to": "store-search",      "label": "Search products" },
+    { "from": "store-products",    "to": "store-pdp",         "label": "Select product" },
+    { "from": "store-search",      "to": "store-pdp",         "label": "Click result" },
+    { "from": "store-collections", "to": "store-pdp",         "label": "Select product" },
+    { "from": "store-pdp",         "to": "store-cart",        "label": "Add to cart" },
+    { "from": "store-pdp",         "to": "store-materials",   "label": "View material story" },
+    { "from": "store-cart",        "to": "store-checkout",    "label": "Proceed to checkout" },
+    { "from": "store-cart",        "to": "store-auth",        "label": "Guest prompted to login" },
+    { "from": "store-checkout",    "to": "store-account",     "label": "Order confirmed → account" },
+    { "from": "store-account",     "to": "store-pdp",         "label": "Reorder from history" },
+    { "from": "store-account",     "to": "store-products",    "label": "Browse from wishlist" },
+    { "from": "med-products",      "to": "store-products",    "label": "Published product visible on store" },
+    { "from": "med-products",      "to": "store-pdp",         "label": "Product detail data" },
+    { "from": "med-products",      "to": "store-collections",  "label": "Collection products" },
+    { "from": "med-orders",        "to": "store-account",     "label": "Order status updates" },
+    { "from": "med-inventory",     "to": "store-pdp",         "label": "Stock availability" },
+    { "from": "med-discounts",     "to": "store-checkout",    "label": "Promo codes applied at checkout" },
+    { "from": "med-settings",      "to": "store-checkout",    "label": "Regions, currency, shipping rates" },
+    { "from": "cms-blog",          "to": "store-journal",     "label": "Blog posts rendered on storefront" },
+    { "from": "cms-materials",     "to": "store-materials",   "label": "Material stories rendered" },
+    { "from": "cms-homepage",      "to": "store-home",        "label": "Homepage hero & marquee content" },
+    { "from": "cms-media",         "to": "cms-blog",          "label": "Cover images referenced in posts" },
+    { "from": "cms-media",         "to": "cms-materials",     "label": "Material images referenced" },
+    { "from": "cms-media",         "to": "store-pdp",         "label": "Product images via CloudFront" }
+  ],
+  "flows": [
+    {
+      "moduleId": "store-auth",
+      "moduleName": "Storefront — Authentication",
+      "screens": [
+        { "id": "store-auth-login",         "name": "Login Page",                    "icon": "🔐", "type": "screen" },
+        { "id": "store-auth-register",      "name": "Register Page",                 "icon": "📝", "type": "screen" },
+        { "id": "store-auth-verify",        "name": "Email Verification (optional)", "icon": "📧", "type": "screen" },
+        { "id": "store-auth-success",       "name": "Login Success",                 "icon": "✅", "type": "screen" },
+        { "id": "store-auth-forgot",        "name": "Forgot Password",               "icon": "🔑", "type": "screen" },
+        { "id": "store-auth-reset",         "name": "Reset Password",                "icon": "🔄", "type": "screen" },
+        { "id": "store-auth-wrong-pass",    "name": "Wrong Password Error",          "icon": "❌", "type": "edgeCase" },
+        { "id": "store-auth-email-exists",  "name": "Email Already Registered",      "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-auth-locked",        "name": "Account Locked (5 attempts)",   "icon": "🔒", "type": "edgeCase" },
+        { "id": "store-auth-token-expired", "name": "Reset Token Expired",           "icon": "⏱️", "type": "edgeCase" },
+        { "id": "store-auth-social",        "name": "Google OAuth Login",            "icon": "🔗", "type": "missing" }
+      ],
+      "connections": [
+        { "from": "store-auth-login",        "to": "store-auth-register",      "label": "Create account" },
+        { "from": "store-auth-login",        "to": "store-auth-forgot",        "label": "Forgot password" },
+        { "from": "store-auth-login",        "to": "store-auth-success",       "label": "Valid credentials" },
+        { "from": "store-auth-login",        "to": "store-auth-wrong-pass",    "label": "Wrong password" },
+        { "from": "store-auth-login",        "to": "store-auth-locked",        "label": "5 failed attempts" },
+        { "from": "store-auth-register",     "to": "store-auth-success",       "label": "Registered successfully" },
+        { "from": "store-auth-register",     "to": "store-auth-email-exists",  "label": "Email taken" },
+        { "from": "store-auth-forgot",       "to": "store-auth-reset",         "label": "Email sent" },
+        { "from": "store-auth-reset",        "to": "store-auth-success",       "label": "Password updated" },
+        { "from": "store-auth-reset",        "to": "store-auth-token-expired", "label": "Link expired" },
+        { "from": "store-auth-token-expired","to": "store-auth-forgot",        "label": "Resend reset link" },
+        { "from": "store-auth-wrong-pass",   "to": "store-auth-login",         "label": "Retry" }
+      ]
+    },
+    {
+      "moduleId": "store-home",
+      "moduleName": "Storefront — Homepage",
+      "screens": [
+        { "id": "store-home-hero",        "name": "Hero Section",              "icon": "🌟", "type": "screen" },
+        { "id": "store-home-marquee",     "name": "Marquee Bar",               "icon": "📢", "type": "screen" },
+        { "id": "store-home-collections", "name": "Collections Grid",          "icon": "🗂️", "type": "screen" },
+        { "id": "store-home-featured",    "name": "Featured Products",         "icon": "🛋️", "type": "screen" },
+        { "id": "store-home-blog",        "name": "Blog Preview",              "icon": "📖", "type": "screen" },
+        { "id": "store-home-load-fail",   "name": "Products Load Error",       "icon": "❌", "type": "edgeCase" },
+        { "id": "store-home-cms-fail",    "name": "CMS Content Unavailable",   "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-home-wishlist",    "name": "Wishlist Quick-save on Card","icon": "🤍", "type": "missing" }
+      ],
+      "connections": [
+        { "from": "store-home-hero",        "to": "store-home-collections", "label": "Scroll down" },
+        { "from": "store-home-collections", "to": "store-home-featured",    "label": "Scroll down" },
+        { "from": "store-home-featured",    "to": "store-home-blog",        "label": "Scroll down" },
+        { "from": "store-home-featured",    "to": "store-home-load-fail",   "label": "Medusa API error" },
+        { "from": "store-home-hero",        "to": "store-home-cms-fail",    "label": "Payload API error" },
+        { "from": "store-home-featured",    "to": "store-home-wishlist",    "label": "Heart icon (Layer 2)" }
+      ]
+    },
+    {
+      "moduleId": "store-products",
+      "moduleName": "Storefront — Products Listing",
+      "screens": [
+        { "id": "store-pl-grid",         "name": "Products Grid",              "icon": "🗂️", "type": "screen" },
+        { "id": "store-pl-filter",       "name": "Filter Sidebar",             "icon": "🎛️", "type": "screen" },
+        { "id": "store-pl-sort",         "name": "Sort Dropdown",              "icon": "↕️", "type": "screen" },
+        { "id": "store-pl-pagination",   "name": "Pagination / Load More",     "icon": "📄", "type": "screen" },
+        { "id": "store-pl-no-results",   "name": "No Products Found",          "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-pl-load-fail",    "name": "Products Load Error",        "icon": "❌", "type": "edgeCase" },
+        { "id": "store-pl-price-filter", "name": "Price Range Error (invalid)","icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-pl-compare",      "name": "Compare Products (Layer 2)", "icon": "⚖️", "type": "missing" }
+      ],
+      "connections": [
+        { "from": "store-pl-grid",       "to": "store-pl-filter",       "label": "Open filters" },
+        { "from": "store-pl-grid",       "to": "store-pl-sort",         "label": "Sort by" },
+        { "from": "store-pl-filter",     "to": "store-pl-grid",         "label": "Apply filters" },
+        { "from": "store-pl-filter",     "to": "store-pl-no-results",   "label": "No matches" },
+        { "from": "store-pl-filter",     "to": "store-pl-price-filter", "label": "Invalid price range" },
+        { "from": "store-pl-grid",       "to": "store-pl-pagination",   "label": "Next page" },
+        { "from": "store-pl-grid",       "to": "store-pl-load-fail",    "label": "API error" },
+        { "from": "store-pl-grid",       "to": "store-pl-compare",      "label": "Compare (Layer 2)" }
+      ]
+    },
+    {
+      "moduleId": "store-pdp",
+      "moduleName": "Storefront — Product Detail Page",
+      "screens": [
+        { "id": "store-pdp-main",         "name": "Product Detail Page",          "icon": "📄", "type": "screen" },
+        { "id": "store-pdp-gallery",      "name": "Image Gallery",                "icon": "🖼️", "type": "screen" },
+        { "id": "store-pdp-variants",     "name": "Variant Selector",             "icon": "🎛️", "type": "screen" },
+        { "id": "store-pdp-material",     "name": "Material Story Link",          "icon": "🌳", "type": "screen" },
+        { "id": "store-pdp-related",      "name": "Related Products",             "icon": "🔗", "type": "screen" },
+        { "id": "store-pdp-out-of-stock", "name": "Out of Stock State",           "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-pdp-not-found",    "name": "Product Not Found (404)",      "icon": "❌", "type": "edgeCase" },
+        { "id": "store-pdp-unpublished",  "name": "Product Unpublished / Removed","icon": "🚫", "type": "edgeCase" },
+        { "id": "store-pdp-ar-view",      "name": "AR / 3D Product View",         "icon": "🥽", "type": "missing" }
+      ],
+      "connections": [
+        { "from": "store-pdp-main",        "to": "store-pdp-gallery",       "label": "View photos" },
+        { "from": "store-pdp-main",        "to": "store-pdp-variants",      "label": "Select variant" },
+        { "from": "store-pdp-main",        "to": "store-pdp-material",      "label": "Learn about wood" },
+        { "from": "store-pdp-main",        "to": "store-pdp-related",       "label": "Scroll to related" },
+        { "from": "store-pdp-main",        "to": "store-pdp-out-of-stock",  "label": "Variant OOS" },
+        { "from": "store-pdp-main",        "to": "store-pdp-not-found",     "label": "Invalid handle" },
+        { "from": "store-pdp-main",        "to": "store-pdp-unpublished",   "label": "Listing removed" },
+        { "from": "store-pdp-main",        "to": "store-pdp-ar-view",       "label": "AR (Layer 2)" },
+        { "from": "store-pdp-variants",    "to": "store-pdp-out-of-stock",  "label": "OOS variant selected" }
+      ]
+    },
+    {
+      "moduleId": "store-cart",
+      "moduleName": "Storefront — Cart",
+      "screens": [
+        { "id": "store-cart-drawer",       "name": "Cart Drawer (slide-in)",    "icon": "🛒", "type": "screen" },
+        { "id": "store-cart-item",         "name": "Cart Item Row",             "icon": "🛋️", "type": "screen" },
+        { "id": "store-cart-summary",      "name": "Cart Totals & CTA",         "icon": "🧾", "type": "screen" },
+        { "id": "store-cart-empty",        "name": "Empty Cart State",          "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-cart-oos",          "name": "Item Out of Stock in Cart", "icon": "❌", "type": "edgeCase" },
+        { "id": "store-cart-price-change", "name": "Price Changed Since Added", "icon": "⚠️", "type": "edgeCase" }
+      ],
+      "connections": [
+        { "from": "store-cart-drawer",      "to": "store-cart-item",         "label": "Items listed" },
+        { "from": "store-cart-item",        "to": "store-cart-summary",      "label": "Update quantity" },
+        { "from": "store-cart-drawer",      "to": "store-cart-empty",        "label": "No items" },
+        { "from": "store-cart-item",        "to": "store-cart-oos",          "label": "Stock depleted" },
+        { "from": "store-cart-item",        "to": "store-cart-price-change", "label": "Price updated since add" },
+        { "from": "store-cart-summary",     "to": "store-cart-empty",        "label": "Remove all items" }
+      ]
+    },
+    {
+      "moduleId": "store-checkout",
+      "moduleName": "Storefront — Checkout",
+      "screens": [
+        { "id": "store-co-address",      "name": "Step 1 — Address",           "icon": "📍", "type": "screen" },
+        { "id": "store-co-shipping",     "name": "Step 2 — Shipping Method",   "icon": "🚚", "type": "screen" },
+        { "id": "store-co-payment",      "name": "Step 3 — Payment",           "icon": "💳", "type": "screen" },
+        { "id": "store-co-razorpay",     "name": "Razorpay Checkout (INR)",    "icon": "🏦", "type": "screen" },
+        { "id": "store-co-stripe",       "name": "Stripe Checkout (Intl)",     "icon": "💳", "type": "screen" },
+        { "id": "store-co-processing",   "name": "Processing Payment",         "icon": "⏳", "type": "screen" },
+        { "id": "store-co-confirmed",    "name": "Order Confirmed",            "icon": "✅", "type": "screen" },
+        { "id": "store-co-pay-fail",     "name": "Payment Failed",             "icon": "❌", "type": "edgeCase" },
+        { "id": "store-co-address-fail", "name": "Invalid Address / Pincode",  "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-co-oos-block",    "name": "Item OOS — Checkout Blocked","icon": "🚫", "type": "edgeCase" },
+        { "id": "store-co-timeout",      "name": "Payment Timeout",            "icon": "⏱️", "type": "edgeCase" },
+        { "id": "store-co-cod",          "name": "Cash on Delivery Option",    "icon": "💵", "type": "missing" }
+      ],
+      "connections": [
+        { "from": "store-co-address",     "to": "store-co-shipping",     "label": "Address confirmed" },
+        { "from": "store-co-address",     "to": "store-co-address-fail", "label": "Invalid pincode" },
+        { "from": "store-co-shipping",    "to": "store-co-payment",      "label": "Method selected" },
+        { "from": "store-co-payment",     "to": "store-co-razorpay",     "label": "INR / India" },
+        { "from": "store-co-payment",     "to": "store-co-stripe",       "label": "USD / AED / Intl" },
+        { "from": "store-co-razorpay",    "to": "store-co-processing",   "label": "Pay" },
+        { "from": "store-co-stripe",      "to": "store-co-processing",   "label": "Pay" },
+        { "from": "store-co-processing",  "to": "store-co-confirmed",    "label": "Success" },
+        { "from": "store-co-processing",  "to": "store-co-pay-fail",     "label": "Failed" },
+        { "from": "store-co-processing",  "to": "store-co-timeout",      "label": "Timeout" },
+        { "from": "store-co-pay-fail",    "to": "store-co-payment",      "label": "Retry" },
+        { "from": "store-co-address",     "to": "store-co-oos-block",    "label": "OOS item detected" },
+        { "from": "store-co-payment",     "to": "store-co-cod",          "label": "COD option (Layer 2)" }
+      ]
+    },
+    {
+      "moduleId": "store-account",
+      "moduleName": "Storefront — Customer Account",
+      "screens": [
+        { "id": "store-acc-home",      "name": "Account Dashboard",              "icon": "👤", "type": "screen" },
+        { "id": "store-acc-orders",    "name": "Order History",                  "icon": "📦", "type": "screen" },
+        { "id": "store-acc-detail",    "name": "Order Detail & Tracking",        "icon": "🔎", "type": "screen" },
+        { "id": "store-acc-addresses", "name": "Address Book",                   "icon": "📍", "type": "screen" },
+        { "id": "store-acc-wishlist",  "name": "Wishlist",                       "icon": "🤍", "type": "screen" },
+        { "id": "store-acc-profile",   "name": "Profile Settings",               "icon": "⚙️", "type": "screen" },
+        { "id": "store-acc-no-orders", "name": "No Orders Yet",                  "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-acc-no-saves",  "name": "Empty Wishlist",                 "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-acc-save-fail", "name": "Profile Update Failed",          "icon": "❌", "type": "edgeCase" },
+        { "id": "store-acc-returns",   "name": "Return / Exchange Request",      "icon": "↩️", "type": "missing" }
+      ],
+      "connections": [
+        { "from": "store-acc-home",      "to": "store-acc-orders",    "label": "View orders" },
+        { "from": "store-acc-home",      "to": "store-acc-addresses", "label": "Manage addresses" },
+        { "from": "store-acc-home",      "to": "store-acc-wishlist",  "label": "View wishlist" },
+        { "from": "store-acc-home",      "to": "store-acc-profile",   "label": "Edit profile" },
+        { "from": "store-acc-orders",    "to": "store-acc-detail",    "label": "View order" },
+        { "from": "store-acc-orders",    "to": "store-acc-no-orders", "label": "No orders placed" },
+        { "from": "store-acc-wishlist",  "to": "store-acc-no-saves",  "label": "Nothing saved" },
+        { "from": "store-acc-profile",   "to": "store-acc-save-fail", "label": "Save error" },
+        { "from": "store-acc-detail",    "to": "store-acc-returns",   "label": "Request return (Layer 2)" }
+      ]
+    },
+    {
+      "moduleId": "store-search",
+      "moduleName": "Storefront — Search",
+      "screens": [
+        { "id": "store-srch-bar",        "name": "Search Bar (Global)",         "icon": "🔍", "type": "screen" },
+        { "id": "store-srch-autocomplete","name": "Autocomplete Dropdown",      "icon": "💡", "type": "screen" },
+        { "id": "store-srch-results",    "name": "Search Results Page",         "icon": "🗂️", "type": "screen" },
+        { "id": "store-srch-no-results", "name": "No Results Found",            "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-srch-error",      "name": "Search API Error",            "icon": "❌", "type": "edgeCase" },
+        { "id": "store-srch-ai",         "name": "AI Smart Search (Layer 2)",   "icon": "🤖", "type": "missing" }
+      ],
+      "connections": [
+        { "from": "store-srch-bar",        "to": "store-srch-autocomplete", "label": "Typing" },
+        { "from": "store-srch-bar",        "to": "store-srch-results",      "label": "Submit search" },
+        { "from": "store-srch-autocomplete","to": "store-srch-results",     "label": "Select suggestion" },
+        { "from": "store-srch-results",    "to": "store-srch-no-results",   "label": "No matches" },
+        { "from": "store-srch-results",    "to": "store-srch-error",        "label": "API failure" },
+        { "from": "store-srch-bar",        "to": "store-srch-ai",           "label": "AI search (Layer 2)" }
+      ]
+    },
+    {
+      "moduleId": "store-collections",
+      "moduleName": "Storefront — Collections",
+      "screens": [
+        { "id": "store-col-hero",       "name": "Collection Hero",           "icon": "🏡", "type": "screen" },
+        { "id": "store-col-grid",       "name": "Collection Products Grid",  "icon": "🗂️", "type": "screen" },
+        { "id": "store-col-filter",     "name": "Filter within Collection",  "icon": "🎛️", "type": "screen" },
+        { "id": "store-col-empty",      "name": "Empty Collection",          "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-col-not-found",  "name": "Collection Not Found",      "icon": "❌", "type": "edgeCase" }
+      ],
+      "connections": [
+        { "from": "store-col-hero",      "to": "store-col-grid",      "label": "Scroll to products" },
+        { "from": "store-col-grid",      "to": "store-col-filter",    "label": "Apply filters" },
+        { "from": "store-col-grid",      "to": "store-col-empty",     "label": "No products" },
+        { "from": "store-col-hero",      "to": "store-col-not-found", "label": "Invalid handle" }
+      ]
+    },
+    {
+      "moduleId": "store-journal",
+      "moduleName": "Storefront — Journal (Blog)",
+      "screens": [
+        { "id": "store-jrn-listing",    "name": "Blog Listing Page",         "icon": "📋", "type": "screen" },
+        { "id": "store-jrn-card",       "name": "Blog Post Card",            "icon": "📰", "type": "screen" },
+        { "id": "store-jrn-post",       "name": "Blog Post Detail",          "icon": "📖", "type": "screen" },
+        { "id": "store-jrn-empty",      "name": "No Posts Published",        "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-jrn-not-found",  "name": "Post Not Found",            "icon": "❌", "type": "edgeCase" },
+        { "id": "store-jrn-comments",   "name": "Blog Comments Section",     "icon": "💬", "type": "missing" }
+      ],
+      "connections": [
+        { "from": "store-jrn-listing",   "to": "store-jrn-card",       "label": "Posts listed" },
+        { "from": "store-jrn-card",      "to": "store-jrn-post",       "label": "Click post" },
+        { "from": "store-jrn-listing",   "to": "store-jrn-empty",      "label": "No posts" },
+        { "from": "store-jrn-card",      "to": "store-jrn-not-found",  "label": "Post removed" },
+        { "from": "store-jrn-post",      "to": "store-jrn-comments",   "label": "Comments (Layer 2)" }
+      ]
+    },
+    {
+      "moduleId": "store-materials",
+      "moduleName": "Storefront — Materials Showcase",
+      "screens": [
+        { "id": "store-mat-listing",    "name": "Materials Listing",         "icon": "🌳", "type": "screen" },
+        { "id": "store-mat-detail",     "name": "Material Story Detail",     "icon": "📖", "type": "screen" },
+        { "id": "store-mat-products",   "name": "Products Using This Wood",  "icon": "🛋️", "type": "screen" },
+        { "id": "store-mat-not-found",  "name": "Material Not Found",        "icon": "⚠️", "type": "edgeCase" },
+        { "id": "store-mat-3d-grain",   "name": "Interactive Wood Grain 3D", "icon": "🥽", "type": "missing" }
+      ],
+      "connections": [
+        { "from": "store-mat-listing",   "to": "store-mat-detail",    "label": "Select material" },
+        { "from": "store-mat-detail",    "to": "store-mat-products",  "label": "Shop in this wood" },
+        { "from": "store-mat-detail",    "to": "store-mat-not-found", "label": "Invalid slug" },
+        { "from": "store-mat-detail",    "to": "store-mat-3d-grain",  "label": "3D view (Layer 2)" }
+      ]
+    },
+    {
+      "moduleId": "med-products",
+      "moduleName": "Medusa Admin — Products",
+      "screens": [
+        { "id": "med-prod-table",      "name": "Products Table",              "icon": "🗂️", "type": "screen" },
+        { "id": "med-prod-create",     "name": "Create Product Form",         "icon": "➕", "type": "screen" },
+        { "id": "med-prod-edit",       "name": "Edit Product",                "icon": "✏️", "type": "screen" },
+        { "id": "med-prod-variants",   "name": "Manage Variants",             "icon": "🎛️", "type": "screen" },
+        { "id": "med-prod-media",      "name": "Product Images Upload",       "icon": "🖼️", "type": "screen" },
+        { "id": "med-prod-metadata",   "name": "Metadata Fields",             "icon": "🏷️", "type": "screen" },
+        { "id": "med-prod-publish",    "name": "Publish / Draft Toggle",      "icon": "🔄", "type": "screen" },
+        { "id": "med-prod-bulk",       "name": "Bulk CSV Import",             "icon": "📥", "type": "screen" },
+        { "id": "med-prod-delete",     "name": "Delete Confirmation",         "icon": "🗑️", "type": "screen" },
+        { "id": "med-prod-not-found",  "name": "Product Not Found",           "icon": "⚠️", "type": "edgeCase" },
+        { "id": "med-prod-save-fail",  "name": "Save Failed (validation)",    "icon": "❌", "type": "edgeCase" }
+      ],
+      "connections": [
+        { "from": "med-prod-table",    "to": "med-prod-create",    "label": "New product" },
+        { "from": "med-prod-table",    "to": "med-prod-edit",      "label": "Edit" },
+        { "from": "med-prod-table",    "to": "med-prod-delete",    "label": "Delete" },
+        { "from": "med-prod-table",    "to": "med-prod-bulk",      "label": "Import CSV" },
+        { "from": "med-prod-create",   "to": "med-prod-variants",  "label": "Add variants" },
+        { "from": "med-prod-create",   "to": "med-prod-media",     "label": "Upload images" },
+        { "from": "med-prod-create",   "to": "med-prod-metadata",  "label": "Add metadata" },
+        { "from": "med-prod-create",   "to": "med-prod-publish",   "label": "Set status" },
+        { "from": "med-prod-create",   "to": "med-prod-save-fail", "label": "Validation error" },
+        { "from": "med-prod-table",    "to": "med-prod-not-found", "label": "Invalid ID" }
+      ]
+    },
+    {
+      "moduleId": "med-orders",
+      "moduleName": "Medusa Admin — Orders",
+      "screens": [
+        { "id": "med-ord-table",     "name": "Orders Table",                "icon": "🗂️", "type": "screen" },
+        { "id": "med-ord-detail",    "name": "Order Detail",                "icon": "📋", "type": "screen" },
+        { "id": "med-ord-fulfill",   "name": "Fulfillment Workflow",        "icon": "📦", "type": "screen" },
+        { "id": "med-ord-return",    "name": "Return / Exchange",           "icon": "↩️", "type": "screen" },
+        { "id": "med-ord-refund",    "name": "Refund Processing",           "icon": "💰", "type": "screen" },
+        { "id": "med-ord-draft",     "name": "Draft Manual Order",          "icon": "✏️", "type": "screen" },
+        { "id": "med-ord-not-found", "name": "Order Not Found",             "icon": "⚠️", "type": "edgeCase" },
+        { "id": "med-ord-fail",      "name": "Fulfillment Update Failed",   "icon": "❌", "type": "edgeCase" },
+        { "id": "med-ord-refund-fail","name": "Refund Failed",              "icon": "❌", "type": "edgeCase" }
+      ],
+      "connections": [
+        { "from": "med-ord-table",    "to": "med-ord-detail",     "label": "View order" },
+        { "from": "med-ord-detail",   "to": "med-ord-fulfill",    "label": "Fulfill" },
+        { "from": "med-ord-detail",   "to": "med-ord-return",     "label": "Return" },
+        { "from": "med-ord-detail",   "to": "med-ord-refund",     "label": "Refund" },
+        { "from": "med-ord-fulfill",  "to": "med-ord-fail",       "label": "Update failed" },
+        { "from": "med-ord-refund",   "to": "med-ord-refund-fail","label": "Refund failed" },
+        { "from": "med-ord-table",    "to": "med-ord-draft",      "label": "New manual order" },
+        { "from": "med-ord-table",    "to": "med-ord-not-found",  "label": "Invalid ID" }
+      ]
+    },
+    {
+      "moduleId": "cms-blog",
+      "moduleName": "Payload CMS — Blog Posts",
+      "screens": [
+        { "id": "cms-blog-table",     "name": "Blog Posts Table",            "icon": "📋", "type": "screen" },
+        { "id": "cms-blog-create",    "name": "Create Post",                 "icon": "➕", "type": "screen" },
+        { "id": "cms-blog-editor",    "name": "Lexical Rich Text Editor",    "icon": "✏️", "type": "screen" },
+        { "id": "cms-blog-media",     "name": "Cover Image Upload",          "icon": "🖼️", "type": "screen" },
+        { "id": "cms-blog-publish",   "name": "Publish / Draft Toggle",      "icon": "🔄", "type": "screen" },
+        { "id": "cms-blog-preview",   "name": "Live Preview",                "icon": "👁️", "type": "screen" },
+        { "id": "cms-blog-save-fail", "name": "Auto-save Failed",            "icon": "❌", "type": "edgeCase" },
+        { "id": "cms-blog-s3-fail",   "name": "Image Upload to S3 Failed",   "icon": "⚠️", "type": "edgeCase" }
+      ],
+      "connections": [
+        { "from": "cms-blog-table",   "to": "cms-blog-create",   "label": "New post" },
+        { "from": "cms-blog-create",  "to": "cms-blog-editor",   "label": "Write content" },
+        { "from": "cms-blog-create",  "to": "cms-blog-media",    "label": "Upload cover" },
+        { "from": "cms-blog-create",  "to": "cms-blog-publish",  "label": "Set status" },
+        { "from": "cms-blog-create",  "to": "cms-blog-preview",  "label": "Preview" },
+        { "from": "cms-blog-editor",  "to": "cms-blog-save-fail","label": "Auto-save fail" },
+        { "from": "cms-blog-media",   "to": "cms-blog-s3-fail",  "label": "S3 upload error" }
+      ]
+    },
+    {
+      "moduleId": "cms-media",
+      "moduleName": "Payload CMS — Media Library",
+      "screens": [
+        { "id": "cms-media-grid",     "name": "Media Library Grid",          "icon": "🖼️", "type": "screen" },
+        { "id": "cms-media-upload",   "name": "Upload Image / File",         "icon": "📤", "type": "screen" },
+        { "id": "cms-media-detail",   "name": "Media Detail & Alt Text",     "icon": "📋", "type": "screen" },
+        { "id": "cms-media-s3",       "name": "S3 Upload Progress",          "icon": "⏳", "type": "screen" },
+        { "id": "cms-media-cdn-url",  "name": "CloudFront URL Generated",    "icon": "🔗", "type": "screen" },
+        { "id": "cms-media-size-fail","name": "File Too Large",              "icon": "❌", "type": "edgeCase" },
+        { "id": "cms-media-fmt-fail", "name": "Invalid File Format",         "icon": "⚠️", "type": "edgeCase" },
+        { "id": "cms-media-s3-fail",  "name": "S3 Upload Failed",            "icon": "❌", "type": "edgeCase" }
+      ],
+      "connections": [
+        { "from": "cms-media-grid",    "to": "cms-media-upload",   "label": "Upload new" },
+        { "from": "cms-media-upload",  "to": "cms-media-s3",       "label": "Uploading" },
+        { "from": "cms-media-s3",      "to": "cms-media-cdn-url",  "label": "Upload complete" },
+        { "from": "cms-media-cdn-url", "to": "cms-media-detail",   "label": "Edit alt text" },
+        { "from": "cms-media-upload",  "to": "cms-media-size-fail","label": "File > 10MB" },
+        { "from": "cms-media-upload",  "to": "cms-media-fmt-fail", "label": "Invalid format" },
+        { "from": "cms-media-s3",      "to": "cms-media-s3-fail",  "label": "S3 error" }
+      ]
+    }
+  ]
+}

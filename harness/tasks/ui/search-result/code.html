@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-background": "#1f1b15",
+                        "on-tertiary-fixed": "#161f00",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#4a473b",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fff8f3",
+                        "outline-variant": "#cdc6b7",
+                        "inverse-surface": "#353029",
+                        "surface-container-low": "#fcf2e8",
+                        "secondary-fixed-dim": "#e6beb0",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#d5c68f",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1f1b15",
+                        "background": "#fff8f3",
+                        "on-secondary-fixed-variant": "#5d4036",
+                        "secondary": "#76574d",
+                        "surface-variant": "#ebe1d7",
+                        "on-secondary-container": "#795a4f",
+                        "on-tertiary-fixed-variant": "#404b24",
+                        "surface": "#fff8f3",
+                        "primary-container": "#d5c68f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#ebe1d7",
+                        "tertiary-fixed": "#dbe8b4",
+                        "inverse-primary": "#d5c68f",
+                        "secondary-container": "#fed4c6",
+                        "primary": "#695e31",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f7ece2",
+                        "on-tertiary-container": "#4b572e",
+                        "on-secondary-fixed": "#2c160e",
+                        "on-primary-fixed": "#221b00",
+                        "surface-container-high": "#f1e6dd",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffdbcf",
+                        "surface-dim": "#e2d8cf",
+                        "tertiary-container": "#bfcc99",
+                        "surface-tint": "#695e31",
+                        "inverse-on-surface": "#faefe5",
+                        "tertiary-fixed-dim": "#bfcc99",
+                        "primary-fixed": "#f2e2a9",
+                        "on-primary-fixed-variant": "#50461b"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        headline: ['Poppins', 'sans-serif'],
+                        body: ['Poppins', 'sans-serif'],
+                        label: ['Poppins', 'sans-serif']
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Poppins', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- Announcement Bar -->
+<div class="w-full bg-secondary-container text-on-secondary-container py-2 text-center text-xs font-semibold tracking-[0.2em] uppercase">
+        Free Shipping on Orders Over ₹5,000 | Limited Edition Heirloom Collection
+    </div>
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-[#FFFFFF] dark:bg-zinc-900 shadow-[0_20px_40px_rgba(31,27,22,0.05)] docked full-width top-0 sticky z-50">
+<div class="max-w-screen-2xl mx-auto px-8 flex flex-col py-4">
+<div class="flex items-center justify-between gap-8">
+<!-- Brand Logo -->
+<div class="text-xl font-bold text-[#1F1B16] dark:text-[#FAF6EE] shrink-0">TREASURE TROVE</div>
+<!-- Search Bar (on_left context) -->
+<div class="flex-grow max-w-md relative">
+<input class="w-full bg-surface-container border-none focus:ring-1 focus:ring-primary-container text-sm py-2 px-10 rounded-sm" placeholder="Search our collection..." type="text" value="pendant"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-6">
+<button class="hover:text-[#D5C68F] transition-colors duration-300 scale-95 duration-200">
+<span class="material-symbols-outlined">person</span>
+</button>
+<button class="hover:text-[#D5C68F] transition-colors duration-300 scale-95 duration-200">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="hover:text-[#D5C68F] transition-colors duration-300 scale-95 duration-200 relative">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[8px] px-1 rounded-full">2</span>
+</button>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex justify-center gap-10 mt-4 overflow-x-auto no-scrollbar py-2">
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] text-[16px] font-semibold uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-colors duration-300" href="#">DECOR</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] text-[16px] font-semibold uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-colors duration-300" href="#">BED &amp; BATH</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] text-[16px] font-semibold uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-colors duration-300" href="#">KITCHEN &amp; DINING</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] text-[16px] font-semibold uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-colors duration-300" href="#">BAR &amp; GLASSWARE</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] text-[16px] font-semibold uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-colors duration-300" href="#">FLOWERS &amp; PLANTS</a>
+<a class="text-[#1F1B16] dark:text-[#FAF6EE] text-[16px] font-semibold uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-colors duration-300" href="#">OUTDOOR</a>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8 py-12">
+<!-- Breadcrumb & Header -->
+<div class="mb-12">
+<nav class="flex text-[10px] tracking-widest uppercase text-outline mb-4">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="mx-2">/</span>
+<span class="text-on-background font-semibold">Search</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-4xl md:text-5xl font-bold text-on-background tracking-tight mb-2 uppercase">Results for 'pendant'</h1>
+<p class="text-on-surface-variant font-medium text-sm uppercase tracking-widest">38 products found in Lighting &amp; Decor</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs uppercase tracking-widest text-outline">Sort By</span>
+<select class="bg-transparent border-none border-b border-outline-variant focus:ring-0 text-xs font-semibold uppercase tracking-widest py-1 pr-8">
+<option>Featured</option>
+<option>Newest</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+</select>
+</div>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Filter Sidebar -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="sticky top-40 space-y-10">
+<div>
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] mb-6 pb-2 border-b border-outline-variant">Categories</h3>
+<ul class="space-y-3">
+<li class="flex justify-between items-center group cursor-pointer">
+<span class="text-sm font-medium uppercase tracking-widest group-hover:text-primary transition-colors">Brass Pendants</span>
+<span class="text-[10px] text-outline font-bold">12</span>
+</li>
+<li class="flex justify-between items-center group cursor-pointer">
+<span class="text-sm font-medium uppercase tracking-widest group-hover:text-primary transition-colors">Glass Globes</span>
+<span class="text-[10px] text-outline font-bold">08</span>
+</li>
+<li class="flex justify-between items-center group cursor-pointer text-primary">
+<span class="text-sm font-bold uppercase tracking-widest">Artisan Ceramic</span>
+<span class="text-[10px] font-bold">14</span>
+</li>
+<li class="flex justify-between items-center group cursor-pointer">
+<span class="text-sm font-medium uppercase tracking-widest group-hover:text-primary transition-colors">Woven Rattan</span>
+<span class="text-[10px] text-outline font-bold">04</span>
+</li>
+</ul>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] mb-6 pb-2 border-b border-outline-variant">Material</h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 border border-outline-variant text-[10px] font-bold uppercase tracking-widest hover:border-primary transition-colors">Polished Brass</button>
+<button class="px-3 py-1.5 border border-primary text-[10px] font-bold uppercase tracking-widest bg-surface-container-low">Smoked Glass</button>
+<button class="px-3 py-1.5 border border-outline-variant text-[10px] font-bold uppercase tracking-widest hover:border-primary transition-colors">Matte Clay</button>
+<button class="px-3 py-1.5 border border-outline-variant text-[10px] font-bold uppercase tracking-widest hover:border-primary transition-colors">Oxidized Copper</button>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] mb-6 pb-2 border-b border-outline-variant">Price Range</h3>
+<div class="space-y-4">
+<input class="w-full accent-primary bg-outline-variant h-1 rounded-full appearance-none cursor-pointer" max="50000" min="0" type="range"/>
+<div class="flex justify-between text-[10px] font-bold tracking-widest text-on-surface-variant">
+<span>₹2,500</span>
+<span>₹45,000+</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="flex-grow">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-16">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container relative mb-4 rounded-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="minimalist architectural brass pendant light hanging in a serene ivory studio with soft morning shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZRtB6ArFZok-zKkypJygS9jtPLJd6Q7lCUhX1FrvE_7nV-4M9xyDbDnI9HH_xAy4pBMXJVDWgsLGQAuDSEDqZVfw5UrZwqL47F59GG0xzahzrywtUW1YQp5WPWN3G3w0F0Aoa2wg27jZ7C3ZWrQ6IgwWHnDNzErOm0jwX422tJfR89U5iG8fQA3MlzkvUY6l_149jH_TI74qQl17fAijs44zC44UXtXflLsJ0Bm_0pSNs5R_uhhrKK35gIacwQD2JmypkS2tldDSc"/>
+<button class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md py-3 text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Quick Add</button>
+</div>
+<h4 class="text-sm font-semibold uppercase tracking-widest text-on-background mb-1">Aurelia Brass Dome</h4>
+<p class="text-xs text-outline font-medium uppercase tracking-widest mb-2">Artisan Metalwork</p>
+<p class="text-sm font-bold text-primary">₹14,200</p>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container relative mb-4 rounded-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="hand-blown smoked glass globe pendant with warm filament bulb glowing softly against a dark charcoal textured wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhMF3Z0EtziucFb7lUuO5yWMijv-lOqS226YcWe4pgSSrvnl-tOIBjUarvNcHPmhtSi9mXDSRGQlqvSUTTrH5aHSMqA3CiYWdMFT8ZUUPTk_FlScmTL0f_jecfDu3BKdGSth7jhbLCVeb-AphEH1Fbh8tXUMjgLqdUL-2OdRUthYIjTCISDPcesET4jWhs-i5ohwmOCa35-ljf-xu3JDE6LkrKuYSNYLV50WPSNPdA6-3L2XMkb8C8pQdW7jhfq9LUzd8xXeK6tVAm"/>
+<div class="absolute top-4 right-4 bg-error text-on-error text-[10px] px-2 py-1 font-bold tracking-widest uppercase">Rare</div>
+<button class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md py-3 text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Quick Add</button>
+</div>
+<h4 class="text-sm font-semibold uppercase tracking-widest text-on-background mb-1">Luna Smoked Globe</h4>
+<p class="text-xs text-outline font-medium uppercase tracking-widest mb-2">Blown Glass</p>
+<p class="text-sm font-bold text-primary">₹9,800</p>
+</div>
+<!-- Product Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container relative mb-4 rounded-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="asymmetrical handmade ceramic pendant lamp with organic earthy texture in a warm ochre glaze" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgzQOAbPy4nw7YXIFnEnE0bBHbB7JvHT1boOP_91MNMRc1_cX32uYV00ascWunjm3_UToYhAePhPfAXeuBNO_GrQSRrsHVRclMOm51CDoaAWok8jLbOGMKi8jNWfycqW6M_hs54x2A2M_v2Yf7DXFpuG7sVr0hSu0cp8k6XErvkx6co2y0wGmwxAlD1t4KgvrHh9vmD4IQedfcFEu_zZNrQkDBcwiHekZknkXaQGUaXZy9Ooiqsn00d9jHKIdLgyRFx1Ls8kVBiGl2"/>
+<button class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md py-3 text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Quick Add</button>
+</div>
+<h4 class="text-sm font-semibold uppercase tracking-widest text-on-background mb-1">Terra Clay Pendant</h4>
+<p class="text-xs text-outline font-medium uppercase tracking-widest mb-2">Studio Ceramic</p>
+<p class="text-sm font-bold text-primary">₹7,500</p>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container relative mb-4 rounded-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="large industrial style black steel warehouse pendant with copper interior detail hanging over a rustic wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD45DKEakXIC3xTE-kRUnP8-3JY3pUgB-rub3W4O6vAzSQoCcxOvAG_VbyC2NS7oXL9KgUaYgjy16KtJLvhOBl73kGeUODD7q-JBcb6_YUHjmAsgwSLhgAALIusSSA1PRU8jApaegQpWrwK21Wqh6-FgSN4dMriPDn4hCxkcFedywqp-PO5AerTtlXQKTRjB_rH-xkwXFz4QvQFhYv4eL0Lu9k0nTz91wxxD6oO1jkygOk6sG1lnd4i5s9yWE1JpavqmbXvuxMhbOyb"/>
+<button class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md py-3 text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Quick Add</button>
+</div>
+<h4 class="text-sm font-semibold uppercase tracking-widest text-on-background mb-1">Industrial Forge XL</h4>
+<p class="text-xs text-outline font-medium uppercase tracking-widest mb-2">Heritage Iron</p>
+<p class="text-sm font-bold text-primary">₹22,000</p>
+</div>
+<!-- Product Card 5 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container relative mb-4 rounded-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="modern brutalist concrete pendant light with geometric sharp edges and integrated LED strip light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzUrK5E71CBJLWBv_boiQM1sxQSol2yF5zfaPPA7eg2Ml3oGKd8ulwWJzQz9B3yN4jpRG4uFDzNAeYWTF86jeXx3OqlBKTVgQilSLhKn499qG7cEdyd2e7LEHXgy7AJxnYpKQnBWONeWIXKUOzyW_EKs_wafulKXAk7n9RYIoAO48F1lsCfBYx7AX2DzKny-F9dpt5lA6d60CYonGzl05Mt3kvFSD8S1DJL6sziT5Ojkv7DOC_yxaqRkiuzA1iw8R9PTZcx7dgAMIM"/>
+<button class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md py-3 text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Quick Add</button>
+</div>
+<h4 class="text-sm font-semibold uppercase tracking-widest text-on-background mb-1">Block Concrete Lume</h4>
+<p class="text-xs text-outline font-medium uppercase tracking-widest mb-2">Architectural Series</p>
+<p class="text-sm font-bold text-primary">₹11,400</p>
+</div>
+<!-- Product Card 6 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container relative mb-4 rounded-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="triple tiered silk lantern pendant in soft cream hanging in a minimalist bedroom setting with natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYAv78XAT3dqT37_MT_dPQUmwcGCY4Vvh5TEM93Hy6XYdF-bRqLp-muYDFmBQBmmyy5r2ixuRnGtb-DBw4Zgub_m98Ef-mD0ZvJcr-WZchus-Vbi_tZHDYe3Q_Dmsmzru-LXfR_GjWQOu-B6vTYaAUWZaZtGSPSSQFm5RMmsItc9dArQMGeA_fWCVmpwZ80jz0STwgmoXU_9uaKHrL5nA176V-34pZLv1S27cMpwI81fX-inDoRyqyGl2jPYOJOPG6GQkv-OrXTT9p"/>
+<button class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md py-3 text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Quick Add</button>
+</div>
+<h4 class="text-sm font-semibold uppercase tracking-widest text-on-background mb-1">Kyoto Silk Tier</h4>
+<p class="text-xs text-outline font-medium uppercase tracking-widest mb-2">Textile Craft</p>
+<p class="text-sm font-bold text-primary">₹18,900</p>
+</div>
+<!-- Product Card 7 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container relative mb-4 rounded-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="hammered copper cone pendant light with warm metallic reflections in a sunlit kitchen environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf2jdKdSZVJUTPZOSnVeU2XbIYIPd78p-vFPe8Dmi1V2Isii4lcbJ4_XDoGXexbb0HIy6S8lzjxkgTm3deXQHJwi3lq-tSRdYyT_l-o1GOXjfbbDvMrAaH7avkLtT0afc_X8olQzD_zKdIby2OYaTvO4GGZSYDjArJAfdnkbKyyevdMGvFsnrquKVngVezGFGzXKU09z0oy9UxPfF4gHVR9zVu-DRNHSOfuiX9tYhqelQ-ju7oFUr5_INSra14QXxdFtu2NU2qLM5l"/>
+<button class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md py-3 text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Quick Add</button>
+</div>
+<h4 class="text-sm font-semibold uppercase tracking-widest text-on-background mb-1">Copper Flare Cone</h4>
+<p class="text-xs text-outline font-medium uppercase tracking-widest mb-2">Hammered Metal</p>
+<p class="text-sm font-bold text-primary">₹12,600</p>
+</div>
+<!-- Product Card 8 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container relative mb-4 rounded-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="elegant fluted glass pendant light with gold hardware details hanging against a light grey marble wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMmKmndEpqwFU6vSZ0qmUmwLw8OHKsdoUli-QYP2tCSt5I5coRF2jT0yQCDOFV5MRfiEdvUWZgcyGnqwvPiCXIIO_daQUrrccyVn7uHz0RhqU2-CrR0Cmv6hhUqMoF8qF3I5dCAdg_VxD_pFlgrgrFgp8M5d8Nq-nJ4omlXET3boofYT66s4nyki52sZ7PzzzCES2dAEX_ckXPiS--0dsTNDfcZ_YXSMUCAfLhwb2xsL7HYh4uzOAJRnxbk5gVdMBQiOVeVPfIm6Tm"/>
+<button class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md py-3 text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Quick Add</button>
+</div>
+<h4 class="text-sm font-semibold uppercase tracking-widest text-on-background mb-1">Eloise Fluted Glass</h4>
+<p class="text-xs text-outline font-medium uppercase tracking-widest mb-2">Premium Lighting</p>
+<p class="text-sm font-bold text-primary">₹15,500</p>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-24 flex items-center justify-center gap-8 border-t border-outline-variant pt-12">
+<button class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-outline hover:text-primary transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-sm">west</span> Prev
+                    </button>
+<div class="flex items-center gap-6">
+<span class="text-[10px] font-bold tracking-[0.2em] border-b-2 border-primary pb-1">01</span>
+<a class="text-[10px] font-bold tracking-[0.2em] text-outline hover:text-on-background transition-colors" href="#">02</a>
+<a class="text-[10px] font-bold tracking-[0.2em] text-outline hover:text-on-background transition-colors" href="#">03</a>
+<span class="text-[10px] font-bold tracking-[0.2em] text-outline">...</span>
+<a class="text-[10px] font-bold tracking-[0.2em] text-outline hover:text-on-background transition-colors" href="#">05</a>
+</div>
+<button class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-on-background hover:text-primary transition-colors">
+                        Next <span class="material-symbols-outlined text-sm">east</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-[#AB877B] dark:bg-zinc-950 w-full px-12 py-16 grid grid-cols-1 md:grid-cols-5 gap-8">
+<div class="col-span-1 md:col-span-2">
+<div class="text-lg font-semibold text-[#FAF6EE] mb-6">TREASURE TROVE</div>
+<p class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] leading-relaxed max-w-sm">
+                Curating timeless design and heirloom quality pieces for the modern home. Celebrating India's artisanal heritage with global modernist vision.
+            </p>
+<div class="mt-8 flex gap-4">
+<a class="text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#"><span class="material-symbols-outlined">mail</span></a>
+<a class="text-[#FAF6EE] hover:text-[#D5C68F] transition-all" href="#"><span class="material-symbols-outlined">pin_drop</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-[#FAF6EE] font-bold text-xs uppercase tracking-[0.2em] mb-6">Explore</h4>
+<ul class="space-y-4">
+<li><a class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-all" href="#">SHOP</a></li>
+<li><a class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-all" href="#">TRACK ORDER</a></li>
+<li><a class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-all" href="#">SIGN IN</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-[#FAF6EE] font-bold text-xs uppercase tracking-[0.2em] mb-6">Support</h4>
+<ul class="space-y-4">
+<li><a class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-all" href="#">HELP</a></li>
+<li><a class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-all" href="#">CONTACT</a></li>
+<li><a class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-all" href="#">POLICIES</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-[#FAF6EE] font-bold text-xs uppercase tracking-[0.2em] mb-6">Registry</h4>
+<ul class="space-y-4">
+<li><a class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-all" href="#">GIFT CARDS</a></li>
+<li><a class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-all" href="#">WEDDING REGISTRY</a></li>
+<li><a class="text-[#FAF6EE] text-[14px] uppercase tracking-[0.10em] hover:text-[#D5C68F] transition-all" href="#">CORPORATE GIFTS</a></li>
+</ul>
+</div>
+<div class="col-span-1 md:col-span-5 border-t border-[#FAF6EE]/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-[#FAF6EE] text-[12px] uppercase tracking-[0.10em]">Copyright 2026 Treasure Trove. Made in India.</span>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-[#FAF6EE]">payments</span>
+<span class="material-symbols-outlined text-[#FAF6EE]">credit_card</span>
+</div>
+</div>
+</footer>
+</body></html>
